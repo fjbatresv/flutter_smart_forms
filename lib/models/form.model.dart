@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'field.model.dart';
 
 class FormModel {
@@ -7,9 +9,9 @@ class FormModel {
   final List<FieldModel> fields;
 
   FormModel({
-    this.name,
-    this.submitButton,
+    @required this.name,
+    @required this.submitButton,
     this.resetButton = '',
-    this.fields,
+    @required this.fields,
   });
 }

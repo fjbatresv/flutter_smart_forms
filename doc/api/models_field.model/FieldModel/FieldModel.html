@@ -64,10 +64,10 @@
       <li><a href="../../models_field.model/FieldModel/errorMessage.html">errorMessage</a></li>
       <li><a href="../../models_field.model/FieldModel/hint.html">hint</a></li>
       <li><a href="../../models_field.model/FieldModel/label.html">label</a></li>
+      <li><a href="../../models_field.model/FieldModel/mandatory.html">mandatory</a></li>
       <li><a href="../../models_field.model/FieldModel/maxLenght.html">maxLenght</a></li>
       <li><a href="../../models_field.model/FieldModel/password.html">password</a></li>
       <li><a href="../../models_field.model/FieldModel/readOnly.html">readOnly</a></li>
-      <li><a href="../../models_field.model/FieldModel/required.html">required</a></li>
       <li><a href="../../models_field.model/FieldModel/type.html">type</a></li>
       <li><a href="../../models_field.model/FieldModel/vallidate.html">vallidate</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
@@ -91,11 +91,11 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">FieldModel</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-label">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">label</span>, </span></li>
+      <span class="name ">FieldModel</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-label">{<span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">label</span>, </span></li>
 <li><span class="parameter" id="-param-type"><span class="type-annotation"><a href="../../utils_enums/Types-class.html">Types</a></span> <span class="parameter-name">type</span>: <span class="default-value">Types.text</span>, </span></li>
 <li><span class="parameter" id="-param-errorMessage"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">errorMessage</span>: <span class="default-value">''</span>, </span></li>
-<li><span class="parameter" id="-param-required"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">required</span>: <span class="default-value">false</span>, </span></li>
-<li><span class="parameter" id="-param-action"><span class="type-annotation"><a href="../../utils_enums/Actions-class.html">Actions</a></span> <span class="parameter-name">action</span>: <span class="default-value">Actions.auto</span>, </span></li>
+<li><span class="parameter" id="-param-mandatory"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">mandatory</span>: <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="-param-action"><span class="type-annotation"><a href="../../utils_enums/InputActions-class.html">InputActions</a></span> <span class="parameter-name">action</span>: <span class="default-value">InputActions.auto</span>, </span></li>
 <li><span class="parameter" id="-param-hint"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">hint</span>: <span class="default-value">''</span>, </span></li>
 <li><span class="parameter" id="-param-vallidate"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">vallidate</span>: <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="-param-maxLenght"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">maxLenght</span>: <span class="default-value">0</span>, </span></li>
@@ -108,11 +108,11 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">FieldModel({
-  this.label,
+  @required this.label,
   this.type = Types.text,
   this.errorMessage = &#39;&#39;,
-  this.required = false,
-  this.action = Actions.auto,
+  this.mandatory = false,
+  this.action = InputActions.auto,
   this.hint = &#39;&#39;,
   this.vallidate = false,
   this.maxLenght = 0,

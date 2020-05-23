@@ -1,11 +1,13 @@
-import 'package:smart_forms/utils/enums.dart';
+import 'package:flutter/material.dart';
+
+import '../utils/enums.dart';
 
 class FieldModel {
   final String label;
   final Types type;
   final String errorMessage;
-  final bool required;
-  final Actions action;
+  final bool mandatory;
+  final InputActions action;
   final String hint;
   final bool vallidate;
   final int maxLenght;
@@ -13,11 +15,11 @@ class FieldModel {
   final bool readOnly;
 
   FieldModel({
-    this.label,
+    @required this.label,
     this.type = Types.text,
     this.errorMessage = '',
-    this.required = false,
-    this.action = Actions.auto,
+    this.mandatory = false,
+    this.action = InputActions.auto,
     this.hint = '',
     this.vallidate = false,
     this.maxLenght = 0,

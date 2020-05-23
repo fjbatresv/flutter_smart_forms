@@ -61,7 +61,7 @@
       <li><a href="../utils_enums/getInputType.html">getInputType</a></li>
     
       <li class="section-title"><a href="../utils_enums/utils_enums-library.html#enums">Enums</a></li>
-      <li><a href="../utils_enums/Actions-class.html">Actions</a></li>
+      <li><a href="../utils_enums/InputActions-class.html">InputActions</a></li>
       <li><a href="../utils_enums/Types-class.html">Types</a></li>
     
     
@@ -74,21 +74,21 @@
     <section class="multi-line-signature">
         <span class="returntype"><a href="https://api.flutter.dev/flutter/services/TextInputAction-class.html">TextInputAction</a></span>
                 <span class="name ">getInputAction</span>
-(<wbr><ol class="parameter-list"><li><span class="parameter" id="getInputAction-param-action"><span class="type-annotation"><a href="../utils_enums/Actions-class.html">Actions</a></span> <span class="parameter-name">action</span></span></li>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="getInputAction-param-action"><span class="type-annotation"><a href="../utils_enums/InputActions-class.html">InputActions</a></span> <span class="parameter-name">action</span></span></li>
 </ol>)
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">TextInputAction getInputAction(Actions action) {
+      <pre class="language-dart"><code class="language-dart">TextInputAction getInputAction(InputActions action) {
   switch (action) {
-    case Actions.done:
+    case InputActions.done:
       return TextInputAction.done;
       break;
-    case Actions.next:
+    case InputActions.next:
       return TextInputAction.next;
       break;
-    case Actions.auto:
+    case InputActions.auto:
     default:
       return null;
       break;

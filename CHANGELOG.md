@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [1.0.0] - 2020-05-23.
 
-* TODO: Describe initial release.
+The firs release include 6 field types (with many parameters), 2 input actions, submit button, reset Button.

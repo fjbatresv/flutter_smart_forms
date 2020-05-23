@@ -1,9 +1,9 @@
 library smart_forms;
 
 import 'package:flutter/material.dart';
-import 'package:smart_forms/models/field.model.dart';
-import 'package:smart_forms/models/form.model.dart';
-import 'package:smart_forms/utils/enums.dart';
+import './models/field.model.dart';
+import './models/form.model.dart';
+import './utils/enums.dart';
 
 import 'smart_field.dart';
 
@@ -12,8 +12,8 @@ class SmartForms extends StatefulWidget {
   final Function(Map<String, dynamic> result) callback;
   const SmartForms({
     Key key,
-    this.form,
-    this.callback,
+    @required this.form,
+    @required this.callback,
   }) : super(key: key);
 
   @override
@@ -39,7 +39,8 @@ class _SmartForms extends State<SmartForms> {
       buttons.add(
         FlatButton(
           child: Text(widget.form.resetButton),
-          onPressed: () => _form.currentState.reset(),
+          onPressed: () =>
+              _controllers.forEach((controller) => controller.clear()),
         ),
       );
     }
@@ -77,7 +78,7 @@ class _SmartForms extends State<SmartForms> {
         nextFocus: index < length - 1 ? _focuses[index + 1] : null,
         label: field.label,
         password: field.password,
-        required: field.required,
+        mandatory: field.mandatory,
         readOnly: field.readOnly,
         hint: field.hint.isEmpty ? null : field.hint,
         maxLength: field.maxLenght == 0 ? null : field.maxLenght,

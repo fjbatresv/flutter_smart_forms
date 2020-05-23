@@ -67,11 +67,11 @@
       <li><a href="../../smart_field/SmartField/focusNode.html">focusNode</a></li>
       <li><a href="../../smart_field/SmartField/hint.html">hint</a></li>
       <li><a href="../../smart_field/SmartField/label.html">label</a></li>
+      <li><a href="../../smart_field/SmartField/mandatory.html">mandatory</a></li>
       <li><a href="../../smart_field/SmartField/maxLength.html">maxLength</a></li>
       <li><a href="../../smart_field/SmartField/nextFocus.html">nextFocus</a></li>
       <li><a href="../../smart_field/SmartField/password.html">password</a></li>
       <li><a href="../../smart_field/SmartField/readOnly.html">readOnly</a></li>
-      <li><a href="../../smart_field/SmartField/required.html">required</a></li>
       <li><a href="../../smart_field/SmartField/type.html">type</a></li>
       <li><a href="../../smart_field/SmartField/validate.html">validate</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/Widget/hashCode.html">hashCode</a></li>
@@ -106,18 +106,18 @@
       
       <span class="name ">SmartField</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-key">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a></span> <span class="parameter-name">key</span>, </span></li>
 <li><span class="parameter" id="-param-type"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/services/TextInputType-class.html">TextInputType</a></span> <span class="parameter-name">type</span>: <span class="default-value">TextInputType.text</span>, </span></li>
-<li><span class="parameter" id="-param-focusNode"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/FocusNode-class.html">FocusNode</a></span> <span class="parameter-name">focusNode</span>, </span></li>
-<li><span class="parameter" id="-param-nextFocus"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/FocusNode-class.html">FocusNode</a></span> <span class="parameter-name">nextFocus</span>, </span></li>
+<li><span class="parameter" id="-param-focusNode"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/FocusNode-class.html">FocusNode</a></span> <span class="parameter-name">focusNode</span>, </span></li>
+<li><span class="parameter" id="-param-nextFocus"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/FocusNode-class.html">FocusNode</a></span> <span class="parameter-name">nextFocus</span>, </span></li>
 <li><span class="parameter" id="-param-action"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/services/TextInputAction-class.html">TextInputAction</a></span> <span class="parameter-name">action</span>, </span></li>
-<li><span class="parameter" id="-param-label"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">label</span>, </span></li>
+<li><span class="parameter" id="-param-label"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">label</span>, </span></li>
 <li><span class="parameter" id="-param-hint"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">hint</span>, </span></li>
 <li><span class="parameter" id="-param-errorMessage"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">errorMessage</span>, </span></li>
-<li><span class="parameter" id="-param-required"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">required</span>: <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="-param-mandatory"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">mandatory</span>: <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="-param-validate"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">validate</span>: <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="-param-maxLength"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">maxLength</span>, </span></li>
 <li><span class="parameter" id="-param-callback"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a></span> <span class="parameter-name">callback</span>, </span></li>
 <li><span class="parameter" id="-param-password"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">password</span>: <span class="default-value">false</span>, </span></li>
-<li><span class="parameter" id="-param-controller"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/TextEditingController-class.html">TextEditingController</a></span> <span class="parameter-name">controller</span>, </span></li>
+<li><span class="parameter" id="-param-controller"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/TextEditingController-class.html">TextEditingController</a></span> <span class="parameter-name">controller</span>, </span></li>
 <li><span class="parameter" id="-param-readOnly"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">readOnly</span>: <span class="default-value">false</span>}</span></li>
 </ol>)
     </section>
@@ -128,18 +128,18 @@
       <pre class="language-dart"><code class="language-dart">SmartField({
   Key key,
   this.type = TextInputType.text,
-  this.focusNode,
-  this.nextFocus,
+  @required this.focusNode,
+  @required this.nextFocus,
   this.action,
-  this.label,
+  @required this.label,
   this.hint,
   this.errorMessage,
-  this.required = false,
+  this.mandatory = false,
   this.validate = false,
   this.maxLength,
   this.callback,
   this.password = false,
-  this.controller,
+  @required this.controller,
   this.readOnly = false,
 }) : super(key: key);</code></pre>
     </section>

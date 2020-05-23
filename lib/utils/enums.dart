@@ -33,21 +33,21 @@ TextInputType getInputType(Types type) {
   }
 }
 
-enum Actions {
+enum InputActions {
   auto,
   next,
   done,
 }
 
-TextInputAction getInputAction(Actions action) {
+TextInputAction getInputAction(InputActions action) {
   switch (action) {
-    case Actions.done:
+    case InputActions.done:
       return TextInputAction.done;
       break;
-    case Actions.next:
+    case InputActions.next:
       return TextInputAction.next;
       break;
-    case Actions.auto:
+    case InputActions.auto:
     default:
       return null;
       break;

@@ -9,7 +9,7 @@ class SmartField extends StatefulWidget {
   final String label;
   final String hint;
   final String errorMessage;
-  final bool required;
+  final bool mandatory;
   final bool validate;
   final bool password;
   final int maxLength;
@@ -19,18 +19,18 @@ class SmartField extends StatefulWidget {
   SmartField({
     Key key,
     this.type = TextInputType.text,
-    this.focusNode,
-    this.nextFocus,
+    @required this.focusNode,
+    @required this.nextFocus,
     this.action,
-    this.label,
+    @required this.label,
     this.hint,
     this.errorMessage,
-    this.required = false,
+    this.mandatory = false,
     this.validate = false,
     this.maxLength,
     this.callback,
     this.password = false,
-    this.controller,
+    @required this.controller,
     this.readOnly = false,
   }) : super(key: key);
 
@@ -78,7 +78,7 @@ class _SmartField extends State<SmartField> {
   void _editCompleted() {
     String text = widget.controller.text;
     setState(() {
-      _error = ((widget.required && (text == null || text.isEmpty)) ||
+      _error = ((widget.mandatory && (text == null || text.isEmpty)) ||
           (widget.validate && !validField(widget.type, text)));
     });
   }
@@ -100,7 +100,7 @@ class _SmartField extends State<SmartField> {
           : TextInputAction.next;
     }
     _label = widget.label;
-    if (widget.required) {
+    if (widget.mandatory) {
       _label = _label + "*";
     }
     super.initState();
@@ -127,7 +127,7 @@ class _SmartField extends State<SmartField> {
       readOnly: widget.readOnly,
       validator: (value) {
         String text = value;
-        return ((widget.required && (text == null || text.isEmpty)) ||
+        return ((widget.mandatory && (text == null || text.isEmpty)) ||
                 (widget.validate && !validField(widget.type, text)))
             ? widget.errorMessage
             : null;
