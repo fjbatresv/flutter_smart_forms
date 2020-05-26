@@ -1,6 +1,6 @@
 name: smart_forms
 description: A flutter forms generator based on objects with multiple parameters.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/fjbatresv/flutter_smart_forms
 
 environment:
