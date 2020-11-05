@@ -5,6 +5,8 @@ class SmartField extends StatefulWidget {
   final FocusNode focusNode;
   final FocusNode nextFocus;
   final TextInputAction action;
+  final TextEditingController sameTo;
+  final String sameToMessage;
   final VoidCallback callback;
   final String label;
   final String hint;
@@ -16,23 +18,25 @@ class SmartField extends StatefulWidget {
   final TextEditingController controller;
   final bool readOnly;
 
-  SmartField({
-    Key key,
-    this.type = TextInputType.text,
-    @required this.focusNode,
-    @required this.nextFocus,
-    this.action,
-    @required this.label,
-    this.hint,
-    this.errorMessage,
-    this.mandatory = false,
-    this.validate = false,
-    this.maxLength,
-    this.callback,
-    this.password = false,
-    @required this.controller,
-    this.readOnly = false,
-  }) : super(key: key);
+  SmartField(
+      {Key key,
+      this.type = TextInputType.text,
+      @required this.focusNode,
+      @required this.nextFocus,
+      this.action,
+      @required this.label,
+      this.hint,
+      this.errorMessage,
+      this.mandatory = false,
+      this.validate = false,
+      this.maxLength,
+      this.callback,
+      this.password = false,
+      @required this.controller,
+      this.readOnly = false,
+      this.sameTo,
+      this.sameToMessage})
+      : super(key: key);
 
   @override
   _SmartField createState() {
@@ -44,8 +48,10 @@ class _SmartField extends State<SmartField> {
   bool _error = false;
   TextInputAction _action;
   String _label;
+  String errorMessage = '';
 
   bool validField(TextInputType type, String value) {
+    errorMessage = widget.errorMessage;
     bool result = true;
     switch (type.index) {
       case 0: //text
@@ -71,6 +77,12 @@ class _SmartField extends State<SmartField> {
             r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$";
         result = RegExp(pattern).hasMatch(value);
         break;
+    }
+    if (result && widget.sameTo != null) {
+      result = widget.sameTo.text == widget.controller.text;
+      if (!result) {
+        this.errorMessage = widget.sameToMessage;
+      }
     }
     return result;
   }
@@ -129,7 +141,7 @@ class _SmartField extends State<SmartField> {
         String text = value;
         return ((widget.mandatory && (text == null || text.isEmpty)) ||
                 (widget.validate && !validField(widget.type, text)))
-            ? widget.errorMessage
+            ? errorMessage
             : null;
       },
     );

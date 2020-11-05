@@ -12,3 +12,8 @@ Added the example of usage with 2 fields.
 
 - Added new option to manage the validation, reset and get the response with external buttons.
 - Added example with new functionallity.
+
+## [1.0.3] - 2020-11-05
+
+- Added support to compare two fields and set child like invalid.
+- Fixed an issue for buttons

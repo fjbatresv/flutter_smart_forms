@@ -59,18 +59,29 @@ class SmartFormsState extends State<SmartForms> {
           children: buttons,
         ),
       );
-    } else {
+      widgets.add(
+        SizedBox(
+          height: 20,
+        ),
+      );
+    } else if (buttons.isNotEmpty) {
       widgets.add(buttons[0]);
+      widgets.add(
+        SizedBox(
+          height: 20,
+        ),
+      );
     }
-    widgets.add(
-      SizedBox(
-        height: 20,
-      ),
-    );
     return widgets;
   }
 
-  Widget _buildField(field, index, length) {
+  Widget _buildField(FieldModel field, index, length) {
+    TextEditingController sameToController;
+    if (field.sameTo.isNotEmpty) {
+      final int sameTo = widget.form.fields
+          .indexWhere((FieldModel i) => i.name == field.sameTo);
+      sameToController = sameTo != -1 ? _controllers[sameTo] : null;
+    }
     return Padding(
       padding: EdgeInsets.only(
         bottom: index < length - 1 ? 10 : 60,
@@ -85,6 +96,8 @@ class SmartFormsState extends State<SmartForms> {
         password: field.password,
         mandatory: field.mandatory,
         readOnly: field.readOnly,
+        sameTo: sameToController,
+        sameToMessage: field.sameToError,
         hint: field.hint.isEmpty ? null : field.hint,
         maxLength: field.maxLenght == 0 ? null : field.maxLenght,
         errorMessage: field.errorMessage,
@@ -112,7 +125,8 @@ class SmartFormsState extends State<SmartForms> {
   Map<String, dynamic> responseToMap() {
     Map<String, dynamic> values = {};
     for (int i = 0; i < widget.form.fields.length; i++) {
-      values[widget.form.fields[i].label] = _controllers[i].text;
+      String key = widget.form.fields[i].name;
+      values[key] = _controllers[i].text;
     }
     return {'form': widget.form.name, 'values': values};
   }

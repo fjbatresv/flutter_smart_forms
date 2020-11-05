@@ -1,4 +1,5 @@
-# Smart Forms
+# Smart Forms 
+![pub points](https://badges.bar/smart_forms/pub%20points) ![pub points](https://badges.bar/smart_forms/likes) ![pub points](https://badges.bar/smart_forms/popularity)
 
 The idea behind this package is a easy way to build and validate a form with especific field types.
 
