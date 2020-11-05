@@ -13,16 +13,16 @@ class SmartForms extends StatefulWidget {
   const SmartForms({
     Key key,
     @required this.form,
-    @required this.callback,
+    this.callback,
   }) : super(key: key);
 
   @override
-  _SmartForms createState() {
-    return _SmartForms();
+  SmartFormsState createState() {
+    return SmartFormsState();
   }
 }
 
-class _SmartForms extends State<SmartForms> {
+class SmartFormsState extends State<SmartForms> {
   GlobalKey<FormState> _form = GlobalKey<FormState>();
   List<TextEditingController> _controllers = [];
   List<FocusNode> _focuses = [];
@@ -39,24 +39,29 @@ class _SmartForms extends State<SmartForms> {
       buttons.add(
         FlatButton(
           child: Text(widget.form.resetButton),
-          onPressed: () =>
-              _controllers.forEach((controller) => controller.clear()),
+          onPressed: () => resetForm,
         ),
       );
     }
-    buttons.add(
-      RaisedButton(
-        child: Text(widget.form.submitButton),
-        onPressed: _validateForm,
-      ),
-    );
-    widgets.add(
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: buttons,
-      ),
-    );
+    if (widget.form.submitButton.isNotEmpty) {
+      buttons.add(
+        RaisedButton(
+          child: Text(widget.form.submitButton),
+          onPressed: _validateForm,
+        ),
+      );
+    }
+    if (buttons.length > 1) {
+      widgets.add(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: buttons,
+        ),
+      );
+    } else {
+      widgets.add(buttons[0]);
+    }
     widgets.add(
       SizedBox(
         height: 20,
@@ -91,12 +96,20 @@ class _SmartForms extends State<SmartForms> {
   }
 
   _validateForm() {
-    if (_form.currentState.validate()) {
-      widget.callback(_responseToMap());
+    if (validateForm()) {
+      widget.callback(responseToMap());
     }
   }
 
-  Map<String, dynamic> _responseToMap() {
+  bool validateForm() {
+    return _form.currentState.validate();
+  }
+
+  resetForm() {
+    _controllers.forEach((controller) => controller.clear());
+  }
+
+  Map<String, dynamic> responseToMap() {
     Map<String, dynamic> values = {};
     for (int i = 0; i < widget.form.fields.length; i++) {
       values[widget.form.fields[i].label] = _controllers[i].text;

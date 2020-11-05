@@ -10,7 +10,7 @@ class FormModel {
 
   FormModel({
     @required this.name,
-    @required this.submitButton,
+    this.submitButton = '',
     this.resetButton = '',
     @required this.fields,
   });

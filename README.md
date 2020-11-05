@@ -2,6 +2,11 @@
 
 The idea behind this package is a easy way to build and validate a form with especific field types.
 
+## Examples
+
+- [Normal Usage](example/main.dart)
+- [Button Out](example/buttonOut.dart)
+
 ## Features
 
 ### Field Types
@@ -29,6 +34,8 @@ In this plugin you can add two buttons that only require the label to show and w
 
 - Submit Button
 - Reset Button
+
+Now you can use your custom button and access to the state of the form including the validateForm, resetForm and the responseToMap methods.
 
 ## How it works
 
