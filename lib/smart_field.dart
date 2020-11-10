@@ -15,6 +15,9 @@ class SmartField extends StatefulWidget {
   final bool validate;
   final bool password;
   final int maxLength;
+  final String maxLengthMessage;
+  final int minLength;
+  final String minLengthMessage;
   final TextEditingController controller;
   final bool readOnly;
 
@@ -30,6 +33,9 @@ class SmartField extends StatefulWidget {
       this.mandatory = false,
       this.validate = false,
       this.maxLength,
+      this.maxLengthMessage,
+      this.minLength,
+      this.minLengthMessage,
       this.callback,
       this.password = false,
       @required this.controller,
@@ -83,6 +89,16 @@ class _SmartField extends State<SmartField> {
       if (!result) {
         this.errorMessage = widget.sameToMessage;
       }
+    } else if (result && widget.minLength != null) {
+      result = widget.controller.text.length >= widget.minLength;
+      if (!result) {
+        this.errorMessage = widget.minLengthMessage;
+      }
+    } else if (result && widget.maxLength != null) {
+      result = widget.controller.text.length <= widget.maxLength;
+      if (!result) {
+        this.errorMessage = widget.maxLengthMessage;
+      }
     }
     return result;
   }
@@ -118,16 +134,22 @@ class _SmartField extends State<SmartField> {
     super.initState();
   }
 
+  TextCapitalization capitalize() {
+    if (widget.type == TextInputType.emailAddress) {
+      return TextCapitalization.none;
+    }
+    return TextCapitalization.words;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       focusNode: widget.focusNode,
       keyboardType: widget.type,
-      maxLength: widget.maxLength,
       obscureText: widget.password,
       textInputAction: _action,
-      textCapitalization: TextCapitalization.words,
+      textCapitalization: capitalize(),
       decoration: InputDecoration(
         labelText: _label,
         errorText: _error ? widget.errorMessage : null,

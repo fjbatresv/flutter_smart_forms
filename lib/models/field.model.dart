@@ -13,7 +13,10 @@ class FieldModel {
   final bool vallidate;
   final String sameTo;
   final String sameToError;
-  final int maxLenght;
+  final int maxLength;
+  final String maxLengthMessage;
+  final int minLength;
+  final String minLengthMessage;
   final bool password;
   final bool readOnly;
 
@@ -28,7 +31,10 @@ class FieldModel {
     this.action = InputActions.auto,
     this.hint = '',
     this.vallidate = false,
-    this.maxLenght = 0,
+    this.maxLength = 0,
+    this.maxLengthMessage = '',
+    this.minLength = 0,
+    this.minLengthMessage = '',
     this.password = false,
     this.readOnly = false,
   }) {
