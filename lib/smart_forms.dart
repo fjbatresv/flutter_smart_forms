@@ -9,7 +9,7 @@ import 'smart_field.dart';
 
 class SmartForms extends StatefulWidget {
   final FormModel form;
-  final Function(Map<String, dynamic> result) callback;
+  final dynamic callback;
   const SmartForms({
     Key key,
     @required this.form,
@@ -82,6 +82,12 @@ class SmartFormsState extends State<SmartForms> {
           .indexWhere((FieldModel i) => i.name == field.sameTo);
       sameToController = sameTo != -1 ? _controllers[sameTo] : null;
     }
+    Function callback;
+    if (widget.form.submitButton.isNotEmpty) {
+      callback = _validateForm;
+    } else if (widget.callback != null) {
+      callback = widget.callback;
+    }
     double bottomPadding = 8;
     if (index == length - 1 && widget.form.submitButton.isNotEmpty) {
       bottomPadding = 16;
@@ -111,7 +117,7 @@ class SmartFormsState extends State<SmartForms> {
         minLengthMessage: field.minLengthMessage,
         errorMessage: field.errorMessage,
         validate: field.vallidate,
-        callback: _validateForm,
+        callback: callback,
         action: getInputAction(field.action),
       ),
     );
