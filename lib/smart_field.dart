@@ -85,17 +85,17 @@ class _SmartField extends State<SmartField> {
         break;
     }
     if (result && widget.sameTo != null) {
-      result = widget.sameTo.text == widget.controller.text;
+      result = widget.sameTo.text == value;
       if (!result) {
         this.errorMessage = widget.sameToMessage;
       }
     } else if (result && widget.minLength != null) {
-      result = widget.controller.text.length >= widget.minLength;
+      result = value.length >= widget.minLength;
       if (!result) {
         this.errorMessage = widget.minLengthMessage;
       }
     } else if (result && widget.maxLength != null) {
-      result = widget.controller.text.length <= widget.maxLength;
+      result = value.length <= widget.maxLength;
       if (!result) {
         this.errorMessage = widget.maxLengthMessage;
       }
@@ -131,6 +131,7 @@ class _SmartField extends State<SmartField> {
     if (widget.mandatory) {
       _label = _label + "*";
     }
+    errorMessage = widget.errorMessage;
     super.initState();
   }
 
@@ -152,7 +153,7 @@ class _SmartField extends State<SmartField> {
       textCapitalization: capitalize(),
       decoration: InputDecoration(
         labelText: _label,
-        errorText: _error ? widget.errorMessage : null,
+        errorText: _error ? this.errorMessage : null,
         hintText: widget.hint,
       ),
       onEditingComplete: _editCompleted,
