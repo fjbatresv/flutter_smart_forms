@@ -82,10 +82,16 @@ class SmartFormsState extends State<SmartForms> {
           .indexWhere((FieldModel i) => i.name == field.sameTo);
       sameToController = sameTo != -1 ? _controllers[sameTo] : null;
     }
+    double bottomPadding = 8;
+    if (index == length - 1 && widget.form.submitButton.isNotEmpty) {
+      bottomPadding = 16;
+    } else if (index == length - 1 && widget.form.submitButton.isEmpty) {
+      bottomPadding = 0;
+    }
     return Padding(
       padding: EdgeInsets.only(
-        bottom: index < length - 1 ? 10 : 60,
-        top: index == 0 ? 20 : 0,
+        bottom: bottomPadding,
+        top: 0,
       ),
       child: SmartField(
         type: getInputType(field.type),
