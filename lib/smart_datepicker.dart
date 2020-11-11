@@ -36,7 +36,6 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
       initialDate: this.dateTime,
       firstDate: this.dateTime,
       lastDate: this.dateTime,
-      locale: Locale('es'),
     );
   }
 
