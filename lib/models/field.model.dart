@@ -20,6 +20,7 @@ class FieldModel {
   final String minLengthMessage;
   final bool password;
   final bool readOnly;
+  final String dateTimeFormat;
   final List<FieldOptionsModel> options;
 
   FieldModel({
@@ -40,6 +41,7 @@ class FieldModel {
     this.password = false,
     this.readOnly = false,
     this.options = const [],
+    this.dateTimeFormat = 'MM/dd/YYYY',
   }) {
     if (this.name.isEmpty) {
       this.name = this.label;

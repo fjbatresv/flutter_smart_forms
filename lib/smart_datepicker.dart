@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:smart_forms/models/field.model.dart';
 
 class SmartDatepicker extends StatefulWidget {
   final FieldModel field;
   final FocusNode focus;
   final FocusNode nextFocus;
+  final DateFormat format;
   final TextEditingController controller;
 
   const SmartDatepicker({
@@ -16,6 +18,7 @@ class SmartDatepicker extends StatefulWidget {
     this.focus,
     this.controller,
     this.nextFocus,
+    this.format,
   }) : super(key: key);
   @override
   _SmartDatepickerState createState() => _SmartDatepickerState();
@@ -47,6 +50,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   }
 
   _datePicked(DateTime date) {
+    this.dateTime = date;
     widget.controller.text =
         this.dateTime.toUtc().millisecondsSinceEpoch.toString();
     if (widget.nextFocus != null && Platform.isAndroid) {
@@ -112,6 +116,11 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
             SizedBox(
               height: 8,
             ),
+            Text(
+              this.dateTime == null
+                  ? widget.field.hint
+                  : widget.format.format(this.dateTime),
+            )
           ],
         ),
       ),

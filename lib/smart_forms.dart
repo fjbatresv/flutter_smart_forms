@@ -1,6 +1,7 @@
 library smart_forms;
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:smart_forms/smart_datepicker.dart';
 import 'package:smart_forms/smart_dropdown.dart';
 import './models/field.model.dart';
@@ -105,17 +106,12 @@ class SmartFormsState extends State<SmartForms> {
   }
 
   Widget _buildSmartDatePicker(FieldModel field, int index, int length) {
-    Function callback;
-    if (widget.form.submitButton.isNotEmpty) {
-      callback = _validateForm;
-    } else if (widget.callback != null) {
-      callback = widget.callback;
-    }
     return SmartDatepicker(
       field: field,
       focus: _focuses[index],
       controller: _controllers[index],
       nextFocus: index < length - 1 ? _focuses[index + 1] : null,
+      format: DateFormat(field.dateTimeFormat),
     );
   }
 
