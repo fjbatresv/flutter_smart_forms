@@ -35,7 +35,11 @@ class _SmartDropDownState extends State<SmartDropDown> {
   }
 
   _onChange(dynamic newValue) {
-    this.value = newValue;
+    if (Platform.isAndroid) {
+      this.value = newValue;
+    } else if (Platform.isIOS) {
+      this.value = widget.field.options[newValue].value;
+    }
     widget.controller.text = this.value;
     setState(() {});
     if (widget.nextFocus != null) {
