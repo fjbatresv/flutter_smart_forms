@@ -7,6 +7,7 @@ enum Types {
   phone,
   email,
   url,
+  dropdown,
 }
 
 TextInputType getInputType(Types type) {
@@ -25,6 +26,9 @@ TextInputType getInputType(Types type) {
       break;
     case Types.url:
       return TextInputType.url;
+      break;
+    case Types.dropdown:
+      return TextInputType.text;
       break;
     case Types.text:
     default:

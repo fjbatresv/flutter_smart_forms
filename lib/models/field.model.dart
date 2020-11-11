@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_forms/models/fieldOptions.model.dart';
 
 import '../utils/enums.dart';
 
@@ -19,6 +20,7 @@ class FieldModel {
   final String minLengthMessage;
   final bool password;
   final bool readOnly;
+  final List<FieldOptionsModel> options;
 
   FieldModel({
     @required this.label,
@@ -37,9 +39,13 @@ class FieldModel {
     this.minLengthMessage = '',
     this.password = false,
     this.readOnly = false,
+    this.options = const [],
   }) {
     if (this.name.isEmpty) {
       this.name = this.label;
+    }
+    if (this.type == Types.dropdown && this.options.isEmpty) {
+      throw Exception('You need to set items for a dropdown');
     }
   }
 }
