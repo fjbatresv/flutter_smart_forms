@@ -41,7 +41,7 @@ class FieldModel {
     this.password = false,
     this.readOnly = false,
     this.options = const [],
-    this.dateTimeFormat = 'MM/dd/YYYY',
+    this.dateTimeFormat = 'MM/dd/yyyy',
   }) {
     if (this.name.isEmpty) {
       this.name = this.label;

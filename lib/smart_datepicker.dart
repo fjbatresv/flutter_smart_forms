@@ -80,7 +80,11 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   }
 
   _launchPicker(BuildContext context) {
-    _launchAndroidPicker(context);
+    if (Platform.isAndroid) {
+      _launchAndroidPicker(context);
+    } else if (Platform.isIOS) {
+      _launchIosPicker(context);
+    }
   }
 
   @override
@@ -90,6 +94,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
       onTap: () => _launchPicker(context),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16),
+        width: double.infinity,
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
