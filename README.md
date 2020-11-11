@@ -20,6 +20,8 @@ You have an **ENUM** which contains the available field types (I will add more p
 - Phone
 - E-Mail
 - URL
+- Dropdown
+- DatePicker
 
 ### Input Actions
 
@@ -49,22 +51,30 @@ You need to generate to types of entitys.
     - label: String (mandatory)
     - type (Use the enum [Types](lib/utils/enums.dart))
     - errorMessage: String
-    - required: boolean
+    - mandatory: boolean
     - actions (Use the enum [Actions](lib/utils/enums.dart))
     - hint: String
     - validate: boolean
     - maxLength: int
     - password: boolean
     - readOnly: boolean
+    - maxLength: int
+    - maxLengthMessage: String
+    - minLength: int
+    - minLengthMessage: String
+    - options: List < FieldOptionsmodel >
+    - dateTimeFormat: String - [Intl format](https://pub.dev/documentation/intl/latest/intl/DateFormat-class.html)
 
 2. Form Model
 
     This is the base of the plugin and contain just a little variables:
 
+    - key: GlobalKey<'SmartFormState'>
     - name: String (mandatory)
-    - submitButton: String (mandatory)
+    - submitButton: String
     - resetButton: String
-    - fields: List of entitys of **Field Model**
+    - callBack
+    - fields: List of entitys of **Field Model** (mandatory)
 
 ## Return Statement
 
