@@ -70,11 +70,42 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   @override
   Widget build(BuildContext context) {
+    Widget dropdown;
     if (Platform.isAndroid) {
-      return _androidDropDown();
+      dropdown = _androidDropDown();
     } else if (Platform.isIOS) {
-      return _iosDropDown(context);
+      dropdown = _iosDropDown(context);
     }
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 3,
+            color: widget.focus.hasFocus
+                ? Theme.of(context).accentColor
+                : Color(0xFF7C7C7C),
+          ),
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            widget.field.label,
+            style: TextStyle(
+              fontSize: 8,
+              fontWeight: FontWeight.w600,
+              color: widget.focus.hasFocus
+                  ? Theme.of(context).accentColor
+                  : Color(0xFF7C7C7C),
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          dropdown
+        ],
+      ),
+    );
   }
 
   Widget _iosDropDown(BuildContext context) {
