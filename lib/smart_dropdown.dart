@@ -88,7 +88,11 @@ class _SmartDropDownState extends State<SmartDropDown> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              value != null ? value : '',
+              value != null ? value : widget.field.hint,
+              style: TextStyle(
+                fontSize: 16,
+                color: value != null ? Colors.black87 : Colors.grey,
+              ),
             ),
             Icon(
               Icons.expand_more,
