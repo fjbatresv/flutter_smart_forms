@@ -94,6 +94,8 @@ class SmartFormsState extends State<SmartForms> {
           switch (field.type) {
             case Types.dropdown:
               return _buildSmartDropDown(field, index, length);
+            case Types.datepicker:
+              return _buildSmartDatePicker(field, index, length);
             default:
               return _buildSmartField(field, index, length);
           }
