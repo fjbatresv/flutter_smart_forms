@@ -77,11 +77,11 @@ class _SmartDropDownState extends State<SmartDropDown> {
       dropdown = _iosDropDown(context);
     }
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.only(top: 16, bottom: Platform.isIOS ? 16 : 0),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: 1,
+            width: Platform.isIOS ? 1 : 0,
             color: widget.focus.hasFocus
                 ? Theme.of(context).accentColor
                 : Color(0xFF7C7C7C),
