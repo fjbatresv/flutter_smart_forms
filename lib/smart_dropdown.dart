@@ -31,6 +31,8 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   @override
   void initState() {
+    this.value = widget.field.options[0].value;
+    widget.controller.text = this.value;
     super.initState();
   }
 
@@ -44,8 +46,6 @@ class _SmartDropDownState extends State<SmartDropDown> {
     setState(() {});
     if (widget.nextFocus != null) {
       FocusScope.of(context).requestFocus(widget.nextFocus);
-    } else {
-      widget.callback();
     }
   }
 
