@@ -50,7 +50,9 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   }
 
   _datePicked(DateTime date) {
-    this.dateTime = date;
+    this.setState(() {
+      this.dateTime = date;
+    });
     widget.controller.text =
         this.dateTime.toUtc().millisecondsSinceEpoch.toString();
     if (widget.nextFocus != null && Platform.isAndroid) {
