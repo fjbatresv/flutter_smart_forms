@@ -95,7 +95,8 @@ class _SmartDropDownState extends State<SmartDropDown> {
                   : widget.field.hint,
               style: TextStyle(
                 fontSize: 16,
-                color: value != null ? Colors.black87 : Colors.grey,
+                fontWeight: FontWeight.w400,
+                color: value != null ? Colors.black : Color(0xFF7c7c7c),
               ),
             ),
             Icon(
