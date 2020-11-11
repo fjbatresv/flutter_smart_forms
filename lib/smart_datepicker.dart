@@ -23,27 +23,58 @@ class SmartDatepicker extends StatefulWidget {
 
 class _SmartDatepickerState extends State<SmartDatepicker> {
   DateTime dateTime;
+  DateTime initial;
 
   @override
   void initState() {
-    dateTime = DateTime.now().subtract(Duration(days: 6574)); // 18 Years aprox
+    // 18 Years aprox
     super.initState();
   }
 
-  Future<DateTime> _launchAndroidPicker(BuildContext context) {
-    return showDatePicker(
-      context: context,
-      initialDate: this.dateTime,
-      firstDate: this.dateTime,
-      lastDate: this.dateTime,
-    );
+  setInitialDate() {
+    this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
   }
 
-  _launchPicker(BuildContext context) async {
-    this.dateTime = await _launchAndroidPicker(context);
-    if (widget.nextFocus != null) {
+  _launchAndroidPicker(BuildContext context) async {
+    setInitialDate();
+    DateTime date = await showDatePicker(
+      context: context,
+      initialDate: this.initial,
+      firstDate: this.initial.subtract(Duration(days: 36600)),
+      lastDate: this.initial,
+    );
+    _datePicked(date);
+  }
+
+  _datePicked(DateTime date) {
+    widget.controller.text =
+        this.dateTime.toUtc().millisecondsSinceEpoch.toString();
+    if (widget.nextFocus != null && Platform.isAndroid) {
       FocusScope.of(context).requestFocus(widget.nextFocus);
     }
+  }
+
+  _launchIosPicker(BuildContext context) {
+    setInitialDate();
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext ctx) {
+          return Container(
+            height: MediaQuery.of(context).size.height / 4,
+            width: double.infinity,
+            child: CupertinoDatePicker(
+              onDateTimeChanged: _datePicked,
+              initialDateTime: this.initial,
+              minimumDate: this.initial.subtract(Duration(days: 36600)),
+              maximumDate: this.initial,
+              mode: CupertinoDatePickerMode.date,
+            ),
+          );
+        });
+  }
+
+  _launchPicker(BuildContext context) {
+    _launchAndroidPicker(context);
   }
 
   @override
