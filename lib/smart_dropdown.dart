@@ -85,7 +85,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
         width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               value != null
@@ -94,7 +94,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
                       .label
                   : widget.field.hint,
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 16,
                 color: value != null ? Colors.black87 : Colors.grey,
               ),
             ),
