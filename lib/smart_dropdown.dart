@@ -77,6 +77,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
       dropdown = _iosDropDown(context);
     }
     return Container(
+      padding: EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -88,11 +89,14 @@ class _SmartDropDownState extends State<SmartDropDown> {
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             widget.field.label,
+            textAlign: TextAlign.start,
             style: TextStyle(
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: FontWeight.w600,
               color: widget.focus.hasFocus
                   ? Theme.of(context).accentColor
