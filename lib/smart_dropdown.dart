@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:smart_forms/models/field.model.dart';
+import 'package:smart_forms/models/fieldOptions.model.dart';
 
 class SmartDropDown extends StatefulWidget {
   final FieldModel field;
@@ -23,7 +27,7 @@ class SmartDropDown extends StatefulWidget {
 }
 
 class _SmartDropDownState extends State<SmartDropDown> {
-  dynamic value;
+  String value;
 
   @override
   void initState() {
@@ -41,13 +45,64 @@ class _SmartDropDownState extends State<SmartDropDown> {
     }
   }
 
+  _launchIosPicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext ctx) {
+        return CupertinoPicker(
+          itemExtent: 32,
+          onSelectedItemChanged: _onChange,
+          children: widget.field.options.map<Widget>((option) {
+            return Text(option.label);
+          }).toList(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (Platform.isAndroid) {
+      return _androidDropDown();
+    } else if (Platform.isIOS) {
+      return _iosDropDown(context);
+    }
+  }
+
+  Widget _iosDropDown(BuildContext context) {
+    return InkWell(
+      focusNode: widget.focus,
+      onTap: () => _launchIosPicker(context),
+      child: Container(
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              value != null ? value : '',
+            ),
+            Icon(
+              Icons.expand_more,
+              size: 16,
+              color: Theme.of(context).accentColor,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _androidDropDown() {
     return DropdownButton(
       focusNode: widget.focus,
       isExpanded: true,
       hint: Text(widget.field.hint),
-      icon: Icon(Icons.arrow_drop_down),
+      icon: Icon(
+        Icons.expand_more,
+        size: 16,
+        color: Theme.of(context).accentColor,
+      ),
       items: widget.field.options.map<DropdownMenuItem>((option) {
         return DropdownMenuItem(
           child: Text(option.label),
