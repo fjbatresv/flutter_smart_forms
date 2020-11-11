@@ -40,7 +40,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
       focusNode: widget.focus,
       hint: Text(widget.field.hint),
       icon: Icon(Icons.arrow_drop_down),
-      items: widget.field.options.map<Widget>((option) {
+      items: widget.field.options.map<DropdownMenuItem>((option) {
         return DropdownMenuItem(
           child: Text(option.label),
           value: option.value,
