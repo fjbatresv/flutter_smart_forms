@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_forms/models/fieldOptions.model.dart';
 
 import '../utils/enums.dart';
 
@@ -13,9 +14,14 @@ class FieldModel {
   final bool vallidate;
   final String sameTo;
   final String sameToError;
-  final int maxLenght;
+  final int maxLength;
+  final String maxLengthMessage;
+  final int minLength;
+  final String minLengthMessage;
   final bool password;
   final bool readOnly;
+  final String dateTimeFormat;
+  final List<FieldOptionsModel> options;
 
   FieldModel({
     @required this.label,
@@ -28,12 +34,20 @@ class FieldModel {
     this.action = InputActions.auto,
     this.hint = '',
     this.vallidate = false,
-    this.maxLenght = 0,
+    this.maxLength = 0,
+    this.maxLengthMessage = '',
+    this.minLength = 0,
+    this.minLengthMessage = '',
     this.password = false,
     this.readOnly = false,
+    this.options = const [],
+    this.dateTimeFormat = 'MM/dd/yyyy',
   }) {
     if (this.name.isEmpty) {
       this.name = this.label;
+    }
+    if (this.type == Types.dropdown && this.options.isEmpty) {
+      throw Exception('You need to set items for a dropdown');
     }
   }
 }

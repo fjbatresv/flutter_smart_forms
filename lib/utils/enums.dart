@@ -7,6 +7,8 @@ enum Types {
   phone,
   email,
   url,
+  dropdown,
+  datepicker,
 }
 
 TextInputType getInputType(Types type) {

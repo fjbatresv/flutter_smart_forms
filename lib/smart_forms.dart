@@ -1,6 +1,9 @@
 library smart_forms;
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:smart_forms/smart_datepicker.dart';
+import 'package:smart_forms/smart_dropdown.dart';
 import './models/field.model.dart';
 import './models/form.model.dart';
 import './utils/enums.dart';
@@ -9,7 +12,7 @@ import 'smart_field.dart';
 
 class SmartForms extends StatefulWidget {
   final FormModel form;
-  final Function(Map<String, dynamic> result) callback;
+  final dynamic callback;
   const SmartForms({
     Key key,
     @required this.form,
@@ -76,35 +79,84 @@ class SmartFormsState extends State<SmartForms> {
   }
 
   Widget _buildField(FieldModel field, index, length) {
+    double bottomPadding = 8;
+    if (index == length - 1 && widget.form.submitButton.isNotEmpty) {
+      bottomPadding = 16;
+    } else if (index == length - 1 && widget.form.submitButton.isEmpty) {
+      bottomPadding = 0;
+    }
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: bottomPadding,
+        top: 0,
+      ),
+      child: Builder(
+        builder: (BuildContext ctx) {
+          switch (field.type) {
+            case Types.dropdown:
+              return _buildSmartDropDown(field, index, length);
+            case Types.datepicker:
+              return _buildSmartDatePicker(field, index, length);
+            default:
+              return _buildSmartField(field, index, length);
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildSmartDatePicker(FieldModel field, int index, int length) {
+    return SmartDatepicker(
+      field: field,
+      focus: _focuses[index],
+      controller: _controllers[index],
+      nextFocus: index < length - 1 ? _focuses[index + 1] : null,
+      format: DateFormat(field.dateTimeFormat),
+    );
+  }
+
+  Widget _buildSmartDropDown(FieldModel field, int index, int length) {
+    return SmartDropDown(
+      field: field,
+      focus: _focuses[index],
+      nextFocus: index < length - 1 ? _focuses[index + 1] : null,
+      controller: _controllers[index],
+    );
+  }
+
+  Widget _buildSmartField(FieldModel field, int index, int length) {
     TextEditingController sameToController;
     if (field.sameTo.isNotEmpty) {
       final int sameTo = widget.form.fields
           .indexWhere((FieldModel i) => i.name == field.sameTo);
       sameToController = sameTo != -1 ? _controllers[sameTo] : null;
     }
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: index < length - 1 ? 10 : 60,
-        top: index == 0 ? 20 : 0,
-      ),
-      child: SmartField(
-        type: getInputType(field.type),
-        focusNode: _focuses[index],
-        controller: _controllers[index],
-        nextFocus: index < length - 1 ? _focuses[index + 1] : null,
-        label: field.label,
-        password: field.password,
-        mandatory: field.mandatory,
-        readOnly: field.readOnly,
-        sameTo: sameToController,
-        sameToMessage: field.sameToError,
-        hint: field.hint.isEmpty ? null : field.hint,
-        maxLength: field.maxLenght == 0 ? null : field.maxLenght,
-        errorMessage: field.errorMessage,
-        validate: field.vallidate,
-        callback: _validateForm,
-        action: getInputAction(field.action),
-      ),
+    Function callback;
+    if (widget.form.submitButton.isNotEmpty) {
+      callback = _validateForm;
+    } else if (widget.callback != null) {
+      callback = widget.callback;
+    }
+    return SmartField(
+      type: getInputType(field.type),
+      focusNode: _focuses[index],
+      controller: _controllers[index],
+      nextFocus: index < length - 1 ? _focuses[index + 1] : null,
+      label: field.label,
+      password: field.password,
+      mandatory: field.mandatory,
+      readOnly: field.readOnly,
+      sameTo: sameToController,
+      sameToMessage: field.sameToError,
+      hint: field.hint.isEmpty ? null : field.hint,
+      maxLength: field.maxLength == 0 ? null : field.maxLength,
+      maxLengthMessage: field.maxLengthMessage,
+      minLength: field.minLength == 0 ? null : field.minLength,
+      minLengthMessage: field.minLengthMessage,
+      errorMessage: field.errorMessage,
+      validate: field.vallidate,
+      callback: callback,
+      action: getInputAction(field.action),
     );
   }
 
