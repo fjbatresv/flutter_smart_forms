@@ -6,10 +6,16 @@ class SmartDropDown extends StatefulWidget {
   final FieldModel field;
   final FocusNode focus;
   final FocusNode nextFocus;
+  final Function callback;
   final TextEditingController controller;
 
   const SmartDropDown(
-      {Key key, this.field, this.focus, this.controller, this.nextFocus})
+      {Key key,
+      this.field,
+      this.focus,
+      this.controller,
+      this.nextFocus,
+      this.callback})
       : super(key: key);
 
   @override
@@ -21,23 +27,25 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   @override
   void initState() {
-    this.value = widget.field.options[0].value;
-    widget.controller.text = this.value;
     super.initState();
   }
 
   _onChange(dynamic newValue) {
     this.value = newValue;
-    if (widget.nextFocus != null) {
-      widget.nextFocus.requestFocus();
-    }
+    widget.controller.text = this.value;
     setState(() {});
+    if (widget.nextFocus != null) {
+      FocusScope.of(context).requestFocus(widget.nextFocus);
+    } else {
+      widget.callback();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton(
       focusNode: widget.focus,
+      isExpanded: true,
       hint: Text(widget.field.hint),
       icon: Icon(Icons.arrow_drop_down),
       items: widget.field.options.map<DropdownMenuItem>((option) {

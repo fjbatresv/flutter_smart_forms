@@ -102,11 +102,18 @@ class SmartFormsState extends State<SmartForms> {
   }
 
   Widget _buildSmartDropDown(FieldModel field, int index, int length) {
+    Function callback;
+    if (widget.form.submitButton.isNotEmpty) {
+      callback = _validateForm;
+    } else if (widget.callback != null) {
+      callback = widget.callback;
+    }
     return SmartDropDown(
-      field: field,
-      focus: _focuses[index],
-      controller: _controllers[index],
-    );
+        field: field,
+        focus: _focuses[index],
+        nextFocus: index < length - 1 ? _focuses[index + 1] : null,
+        controller: _controllers[index],
+        callback: callback);
   }
 
   Widget _buildSmartField(FieldModel field, int index, int length) {

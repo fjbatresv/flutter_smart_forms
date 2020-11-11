@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
+
 class FieldOptionsModel {
-  final String _label;
-  final String _value;
+  final String label;
+  final String value;
 
-  FieldOptionsModel(this._label, this._value);
-
-  String get label => this._label;
-  dynamic get value => this._value;
+  FieldOptionsModel({@required this.label, @required this.value});
 }
