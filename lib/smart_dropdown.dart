@@ -96,7 +96,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
             widget.field.label,
             textAlign: TextAlign.start,
             style: TextStyle(
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
               color: widget.focus.hasFocus
                   ? Theme.of(context).accentColor
