@@ -80,7 +80,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: 3,
+            width: 1,
             color: widget.focus.hasFocus
                 ? Theme.of(context).accentColor
                 : Color(0xFF7C7C7C),
