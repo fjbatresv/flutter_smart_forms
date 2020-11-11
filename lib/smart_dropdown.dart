@@ -10,17 +10,15 @@ class SmartDropDown extends StatefulWidget {
   final FieldModel field;
   final FocusNode focus;
   final FocusNode nextFocus;
-  final Function callback;
   final TextEditingController controller;
 
-  const SmartDropDown(
-      {Key key,
-      this.field,
-      this.focus,
-      this.controller,
-      this.nextFocus,
-      this.callback})
-      : super(key: key);
+  const SmartDropDown({
+    Key key,
+    this.field,
+    this.focus,
+    this.controller,
+    this.nextFocus,
+  }) : super(key: key);
 
   @override
   _SmartDropDownState createState() => _SmartDropDownState();

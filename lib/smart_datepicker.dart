@@ -7,10 +7,16 @@ import 'package:smart_forms/models/field.model.dart';
 class SmartDatepicker extends StatefulWidget {
   final FieldModel field;
   final FocusNode focus;
+  final FocusNode nextFocus;
   final TextEditingController controller;
 
-  const SmartDatepicker({Key key, this.field, this.focus, this.controller})
-      : super(key: key);
+  const SmartDatepicker({
+    Key key,
+    this.field,
+    this.focus,
+    this.controller,
+    this.nextFocus,
+  }) : super(key: key);
   @override
   _SmartDatepickerState createState() => _SmartDatepickerState();
 }
@@ -36,6 +42,9 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
 
   _launchPicker(BuildContext context) async {
     this.dateTime = await _launchAndroidPicker(context);
+    if (widget.nextFocus != null) {
+      FocusScope.of(context).requestFocus(widget.nextFocus);
+    }
   }
 
   @override
