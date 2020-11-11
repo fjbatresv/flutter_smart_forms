@@ -50,15 +50,19 @@ class _SmartDropDownState extends State<SmartDropDown> {
   }
 
   _launchIosPicker(BuildContext context) {
-    showCupertinoModalPopup(
+    showModalBottomSheet(
       context: context,
       builder: (BuildContext ctx) {
-        return CupertinoPicker(
-          itemExtent: 32,
-          onSelectedItemChanged: _onChange,
-          children: widget.field.options.map<Widget>((option) {
-            return Text(option.label);
-          }).toList(),
+        return Container(
+          height: MediaQuery.of(context).size.height / 4,
+          width: double.infinity,
+          child: CupertinoPicker(
+            itemExtent: 32,
+            onSelectedItemChanged: _onChange,
+            children: widget.field.options.map<Widget>((option) {
+              return Text(option.label);
+            }).toList(),
+          ),
         );
       },
     );
