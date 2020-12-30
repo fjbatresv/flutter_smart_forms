@@ -36,6 +36,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   @override
   void initState() {
     // 18 Years aprox
+    this.setInitialDate();
     super.initState();
   }
 
@@ -56,10 +57,12 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
         this.last = this.initial.add(Duration(days: 90));
         break;
     }
+    if (this.dateTime == null) {
+      this.dateTime = this.initial;
+    }
   }
 
   _launchAndroidPicker(BuildContext context) async {
-    setInitialDate();
     DateTime date = await showDatePicker(
       context: context,
       initialDate: this.initial,
@@ -81,7 +84,6 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   }
 
   _launchIosPicker(BuildContext context) {
-    setInitialDate();
     showModalBottomSheet(
         context: context,
         builder: (BuildContext ctx) {
