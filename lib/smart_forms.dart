@@ -111,6 +111,7 @@ class SmartFormsState extends State<SmartForms> {
       focus: _focuses[index],
       controller: _controllers[index],
       nextFocus: index < length - 1 ? _focuses[index + 1] : null,
+      type: field.dateType,
       format: DateFormat(field.dateTimeFormat),
     );
   }

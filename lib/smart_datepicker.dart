@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_forms/models/field.model.dart';
+import 'package:smart_forms/utils/enums.dart';
 
 class SmartDatepicker extends StatefulWidget {
   final FieldModel field;
@@ -11,15 +12,17 @@ class SmartDatepicker extends StatefulWidget {
   final FocusNode nextFocus;
   final DateFormat format;
   final TextEditingController controller;
+  final DateTypes type;
 
-  const SmartDatepicker({
-    Key key,
-    this.field,
-    this.focus,
-    this.controller,
-    this.nextFocus,
-    this.format,
-  }) : super(key: key);
+  const SmartDatepicker(
+      {Key key,
+      this.field,
+      this.focus,
+      this.controller,
+      this.nextFocus,
+      this.format,
+      this.type})
+      : super(key: key);
   @override
   _SmartDatepickerState createState() => _SmartDatepickerState();
 }
@@ -27,6 +30,8 @@ class SmartDatepicker extends StatefulWidget {
 class _SmartDatepickerState extends State<SmartDatepicker> {
   DateTime dateTime;
   DateTime initial;
+  DateTime first;
+  DateTime last;
 
   @override
   void initState() {
@@ -35,7 +40,22 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   }
 
   setInitialDate() {
-    this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
+    this.initial = DateTime.now();
+    switch (widget.type) {
+      case DateTypes.eighteenYearsBefore:
+        this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
+        this.first = this.initial.subtract(Duration(days: 36600));
+        this.last = this.initial;
+        break;
+      case DateTypes.free:
+        this.first = this.initial.subtract(Duration(days: 36600));
+        this.last = this.initial.add(Duration(days: 365));
+        break;
+      case DateTypes.todayAfter:
+        this.first = this.initial;
+        this.last = this.initial.add(Duration(days: 90));
+        break;
+    }
   }
 
   _launchAndroidPicker(BuildContext context) async {
@@ -43,8 +63,8 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
     DateTime date = await showDatePicker(
       context: context,
       initialDate: this.initial,
-      firstDate: this.initial.subtract(Duration(days: 36600)),
-      lastDate: this.initial,
+      firstDate: this.first,
+      lastDate: this.last,
     );
     _datePicked(date);
   }
@@ -71,8 +91,8 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
             child: CupertinoDatePicker(
               onDateTimeChanged: _datePicked,
               initialDateTime: this.initial,
-              minimumDate: this.initial.subtract(Duration(days: 36600)),
-              maximumDate: this.initial,
+              minimumDate: this.first,
+              maximumDate: this.last,
               mode: CupertinoDatePickerMode.date,
             ),
           );

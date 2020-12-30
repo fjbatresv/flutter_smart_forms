@@ -11,6 +11,12 @@ enum Types {
   datepicker,
 }
 
+enum DateTypes {
+  eighteenYearsBefore,
+  todayAfter,
+  free,
+}
+
 TextInputType getInputType(Types type) {
   switch (type) {
     case Types.multiline:
