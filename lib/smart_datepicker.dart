@@ -59,6 +59,8 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
     }
     if (this.dateTime == null) {
       this.dateTime = this.initial;
+      widget.controller.text =
+          this.dateTime.toUtc().millisecondsSinceEpoch.toString();
     }
   }
 
