@@ -35,13 +35,16 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
 
   @override
   void initState() {
-    // 18 Years aprox
     this.setInitialDate();
     super.initState();
   }
 
   setInitialDate() {
-    this.initial = DateTime.now();
+    if (widget.field.value == null) {
+      this.initial = DateTime.now();
+    } else {
+      this.initial = DateTime.fromMillisecondsSinceEpoch(widget.field.value);
+    }
     switch (widget.type) {
       case DateTypes.eighteenYearsBefore:
         this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));

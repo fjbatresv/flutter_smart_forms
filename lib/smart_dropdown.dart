@@ -29,8 +29,11 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   @override
   void initState() {
-    this.value = widget.field.options[0].value;
-    widget.controller.text = this.value;
+    this.value = widget.field.value == null
+        ? widget.field.options[0].value
+        : widget.field.value;
+    widget.controller.text =
+        widget.field.value == null ? this.value : widget.field.value;
     super.initState();
   }
 

@@ -138,6 +138,9 @@ class SmartFormsState extends State<SmartForms> {
     } else if (widget.callback != null) {
       callback = widget.callback;
     }
+    if (field.value != null) {
+      _controllers[index].text = field.value;
+    }
     return SmartField(
       type: getInputType(field.type),
       focusNode: _focuses[index],
