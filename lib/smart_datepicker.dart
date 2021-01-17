@@ -40,11 +40,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   }
 
   setInitialDate() {
-    if (widget.field.value == null) {
-      this.initial = DateTime.now();
-    } else {
-      this.initial = DateTime.fromMillisecondsSinceEpoch(widget.field.value);
-    }
+    this.initial = DateTime.now();
     switch (widget.type) {
       case DateTypes.eighteenYearsBefore:
         this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
@@ -59,6 +55,9 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
         this.first = this.initial;
         this.last = this.initial.add(Duration(days: 90));
         break;
+    }
+    if (widget.field.value != null) {
+      this.initial = DateTime.fromMillisecondsSinceEpoch(widget.field.value);
     }
     if (this.dateTime == null) {
       this.dateTime = this.initial;
