@@ -45,9 +45,6 @@ class _SmartDropDownState extends State<SmartDropDown> {
     }
     widget.controller.text = this.value;
     setState(() {});
-    if (widget.nextFocus != null) {
-      FocusScope.of(context).requestFocus(widget.nextFocus);
-    }
   }
 
   _launchIosPicker(BuildContext context) {
