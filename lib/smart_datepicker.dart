@@ -108,7 +108,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   }
 
   _launchPicker(BuildContext context) {
-    widget.focus.requestFocus();
+    FocusScope.of(context).requestFocus(widget.focus);
     if (Platform.isAndroid) {
       _launchAndroidPicker(context);
     } else if (Platform.isIOS) {
