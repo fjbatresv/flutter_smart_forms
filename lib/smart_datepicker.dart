@@ -73,6 +73,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
       firstDate: this.first,
       lastDate: this.last,
     );
+    widget.focus.unfocus();
     _datePicked(date);
   }
 
@@ -102,10 +103,12 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
               mode: CupertinoDatePickerMode.date,
             ),
           );
-        });
+        })
+      ..then((value) => widget.focus.unfocus());
   }
 
   _launchPicker(BuildContext context) {
+    widget.focus.requestFocus();
     if (Platform.isAndroid) {
       _launchAndroidPicker(context);
     } else if (Platform.isIOS) {
@@ -116,7 +119,6 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      focusNode: widget.focus,
       onTap: () => _launchPicker(context),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16),
