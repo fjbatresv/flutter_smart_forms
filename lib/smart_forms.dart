@@ -111,6 +111,7 @@ class SmartFormsState extends State<SmartForms> {
       focus: _focuses[index],
       controller: _controllers[index],
       nextFocus: index < length - 1 ? _focuses[index + 1] : null,
+      type: field.dateType,
       format: DateFormat(field.dateTimeFormat),
     );
   }
@@ -136,6 +137,9 @@ class SmartFormsState extends State<SmartForms> {
       callback = _validateForm;
     } else if (widget.callback != null) {
       callback = widget.callback;
+    }
+    if (field.value != null) {
+      _controllers[index].text = field.value;
     }
     return SmartField(
       type: getInputType(field.type),

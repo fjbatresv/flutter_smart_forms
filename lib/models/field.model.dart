@@ -21,7 +21,9 @@ class FieldModel {
   final bool password;
   final bool readOnly;
   final String dateTimeFormat;
+  final DateTypes dateType;
   final List<FieldOptionsModel> options;
+  final dynamic value;
 
   FieldModel({
     @required this.label,
@@ -42,6 +44,8 @@ class FieldModel {
     this.readOnly = false,
     this.options = const [],
     this.dateTimeFormat = 'MM/dd/yyyy',
+    this.dateType = DateTypes.eighteenYearsBefore,
+    this.value,
   }) {
     if (this.name.isEmpty) {
       this.name = this.label;

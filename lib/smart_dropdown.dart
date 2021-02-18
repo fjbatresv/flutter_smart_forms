@@ -29,25 +29,27 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   @override
   void initState() {
-    this.value = widget.field.options[0].value;
-    widget.controller.text = this.value;
+    this.value = widget.field.value == null
+        ? widget.field.options[0].value
+        : widget.field.value;
+    widget.controller.text =
+        widget.field.value == null ? this.value : widget.field.value;
     super.initState();
   }
 
   _onChange(dynamic newValue) {
     if (Platform.isAndroid) {
       this.value = newValue;
+      widget.focus.unfocus();
     } else if (Platform.isIOS) {
       this.value = widget.field.options[newValue].value;
     }
     widget.controller.text = this.value;
     setState(() {});
-    if (widget.nextFocus != null) {
-      FocusScope.of(context).requestFocus(widget.nextFocus);
-    }
   }
 
   _launchIosPicker(BuildContext context) {
+    FocusScope.of(context).requestFocus(widget.focus);
     showModalBottomSheet(
       context: context,
       builder: (BuildContext ctx) {
@@ -63,7 +65,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
           ),
         );
       },
-    );
+    )..then((value) => widget.focus.unfocus());
   }
 
   @override
@@ -112,7 +114,6 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   Widget _iosDropDown(BuildContext context) {
     return InkWell(
-      focusNode: widget.focus,
       onTap: () => _launchIosPicker(context),
       child: Container(
         width: double.infinity,
@@ -145,7 +146,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   Widget _androidDropDown() {
     return DropdownButton(
-      focusNode: widget.focus,
+      onTap: () => FocusScope.of(context).requestFocus(widget.focus),
       isExpanded: true,
       hint: Text(widget.field.hint),
       icon: Icon(

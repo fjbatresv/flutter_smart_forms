@@ -20,6 +20,7 @@ class SmartField extends StatefulWidget {
   final String minLengthMessage;
   final TextEditingController controller;
   final bool readOnly;
+  final Function(String) onChange;
 
   SmartField(
       {Key key,
@@ -37,6 +38,7 @@ class SmartField extends StatefulWidget {
       this.minLength,
       this.minLengthMessage,
       this.callback,
+      this.onChange,
       this.password = false,
       @required this.controller,
       this.readOnly = false,
@@ -151,6 +153,7 @@ class _SmartField extends State<SmartField> {
       obscureText: widget.password,
       textInputAction: _action,
       textCapitalization: capitalize(),
+      onChanged: widget.onChange,
       decoration: InputDecoration(
         labelText: _label,
         errorText: _error ? this.errorMessage : null,
