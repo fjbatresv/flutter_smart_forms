@@ -1,5 +1,3 @@
-library smart_forms;
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_forms/smart_datepicker.dart';

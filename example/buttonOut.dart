@@ -43,11 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  _resetForm() {
-    final SmartFormsState currentState = this._formState.currentState;
-    currentState.resetForm();
-  }
-
   @override
   void initState() {
     _form = FormModel(name: "buttonOut", fields: [

@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:smart_forms/models/field.model.dart';
-import 'package:smart_forms/models/fieldOptions.model.dart';
 
 class SmartDropDown extends StatefulWidget {
   final FieldModel field;
@@ -38,7 +37,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
   }
 
   _onChange(dynamic newValue) {
-    if (Platform.isAndroid) {
+    if (!Platform.isIOS) {
       this.value = newValue;
       widget.focus.unfocus();
     } else if (Platform.isIOS) {

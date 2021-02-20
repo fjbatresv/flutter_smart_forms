@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.0.1] - 2021-02-20
+
+* Fixing some minor issues for pub points.
+
 ## [2.0.0] - 2021-02-17
 
 * Added onChange option for smartField
