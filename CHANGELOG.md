@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.0.2] - 2021-04-16
+
+* Updating intl from 0.16.1 to 0.17.0
+
 ## [2.0.1] - 2021-02-20
 
 * Fixing some minor issues for pub points.
