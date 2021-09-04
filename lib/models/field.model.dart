@@ -25,6 +25,7 @@ class FieldModel {
   final List<FieldOptionsModel> options;
   final dynamic value;
   final double padding;
+  final Color readOnlyColor;
 
   FieldModel({
     @required this.label,
@@ -47,6 +48,7 @@ class FieldModel {
     this.options = const [],
     this.dateTimeFormat = 'MM/dd/yyyy',
     this.dateType = DateTypes.eighteenYearsBefore,
+    this.readOnlyColor = const Color(0xFFE9EAEE),
     this.value,
   }) {
     if (this.name.isEmpty) {

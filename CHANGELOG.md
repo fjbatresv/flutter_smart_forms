@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.1.2] - 2021-09-04
+
+* Adding read only background color customizable
+
 ## [2.1.1] - 2021-09-04
 
 * Adding background grey color for readonly fields

@@ -20,6 +20,7 @@ class SmartField extends StatefulWidget {
   final String minLengthMessage;
   final TextEditingController controller;
   final bool readOnly;
+  final Color readOnlyColor;
   final Function(String) onChange;
 
   SmartField(
@@ -43,6 +44,7 @@ class SmartField extends StatefulWidget {
       @required this.controller,
       this.readOnly = false,
       this.sameTo,
+      this.readOnlyColor = const Color(0xFFE9EAEE),
       this.sameToMessage})
       : super(key: key);
 
@@ -157,8 +159,9 @@ class _SmartField extends State<SmartField> {
       textCapitalization: capitalize(),
       onChanged: widget.onChange,
       decoration: this.decoration.copyWith(
-            fillColor:
-                widget.readOnly ? Colors.grey : this.decoration.fillColor,
+            fillColor: widget.readOnly
+                ? widget.readOnlyColor
+                : this.decoration.fillColor,
             labelText: _label,
             errorText: _error ? this.errorMessage : null,
             hintText: widget.hint,

@@ -150,6 +150,7 @@ class SmartFormsState extends State<SmartForms> {
       password: field.password,
       mandatory: field.mandatory,
       readOnly: field.readOnly,
+      readOnlyColor: field.readOnlyColor,
       sameTo: sameToController,
       sameToMessage: field.sameToError,
       hint: field.hint.isEmpty ? null : field.hint,
