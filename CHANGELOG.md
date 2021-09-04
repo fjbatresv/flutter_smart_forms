@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.1.0] - 2021-09-04
+
+* Adding support for the Input Decoration Themes
+
 ## [2.0.2] - 2021-04-16
 
 * Updating intl from 0.16.1 to 0.17.0
