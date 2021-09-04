@@ -24,9 +24,11 @@ class FieldModel {
   final DateTypes dateType;
   final List<FieldOptionsModel> options;
   final dynamic value;
+  final double padding;
 
   FieldModel({
     @required this.label,
+    this.padding,
     this.name = '',
     this.sameTo = '',
     this.sameToError = '',

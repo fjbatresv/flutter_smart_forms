@@ -1,5 +1,10 @@
 # History of changes
 
+## [2.1.1] - 2021-09-04
+
+* Adding background grey color for readonly fields
+* Now you can set a custom padding between fields
+
 ## [2.1.0] - 2021-09-04
 
 * Adding support for the Input Decoration Themes

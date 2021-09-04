@@ -77,11 +77,13 @@ class SmartFormsState extends State<SmartForms> {
   }
 
   Widget _buildField(FieldModel field, index, length) {
-    double bottomPadding = 8;
-    if (index == length - 1 && widget.form.submitButton.isNotEmpty) {
-      bottomPadding = 16;
-    } else if (index == length - 1 && widget.form.submitButton.isEmpty) {
-      bottomPadding = 0;
+    double bottomPadding = field.padding != null ? field.padding : 8;
+    if (field.padding != null) {
+      if (index == length - 1 && widget.form.submitButton.isNotEmpty) {
+        bottomPadding = 16;
+      } else if (index == length - 1 && widget.form.submitButton.isEmpty) {
+        bottomPadding = 0;
+      }
     }
     return Padding(
       padding: EdgeInsets.only(
