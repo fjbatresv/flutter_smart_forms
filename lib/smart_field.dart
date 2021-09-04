@@ -157,6 +157,8 @@ class _SmartField extends State<SmartField> {
       textCapitalization: capitalize(),
       onChanged: widget.onChange,
       decoration: this.decoration.copyWith(
+            fillColor:
+                widget.readOnly ? Colors.grey : this.decoration.fillColor,
             labelText: _label,
             errorText: _error ? this.errorMessage : null,
             hintText: widget.hint,
