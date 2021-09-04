@@ -57,6 +57,7 @@ class _SmartField extends State<SmartField> {
   TextInputAction _action;
   String _label;
   String errorMessage = '';
+  InputDecoration decoration = InputDecoration();
 
   bool validField(TextInputType type, String value) {
     errorMessage = widget.errorMessage;
@@ -146,6 +147,7 @@ class _SmartField extends State<SmartField> {
 
   @override
   Widget build(BuildContext context) {
+    this.decoration.applyDefaults(Theme.of(context).inputDecorationTheme);
     return TextFormField(
       controller: widget.controller,
       focusNode: widget.focusNode,
@@ -154,11 +156,11 @@ class _SmartField extends State<SmartField> {
       textInputAction: _action,
       textCapitalization: capitalize(),
       onChanged: widget.onChange,
-      decoration: InputDecoration(
-        labelText: _label,
-        errorText: _error ? this.errorMessage : null,
-        hintText: widget.hint,
-      ),
+      decoration: this.decoration.copyWith(
+            labelText: _label,
+            errorText: _error ? this.errorMessage : null,
+            hintText: widget.hint,
+          ),
       onEditingComplete: _editCompleted,
       onFieldSubmitted: _fieldSubmit,
       keyboardAppearance: Brightness.light,
