@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -26,6 +25,7 @@ class SmartDropDown extends StatefulWidget {
 
 class _SmartDropDownState extends State<SmartDropDown> {
   String? value;
+  ThemeData? _theme;
 
   @override
   void initState() {
@@ -38,10 +38,10 @@ class _SmartDropDownState extends State<SmartDropDown> {
   }
 
   _onChange(dynamic newValue) {
-    if (!Platform.isIOS && kIsWeb) {
+    if (this._theme!.platform != TargetPlatform.iOS || kIsWeb) {
       this.value = newValue;
       widget.focus!.unfocus();
-    } else if (Platform.isIOS) {
+    } else if (this._theme!.platform == TargetPlatform.iOS) {
       this.value = widget.field!.options[newValue].value;
     }
     widget.controller!.text = this.value!;
@@ -71,17 +71,21 @@ class _SmartDropDownState extends State<SmartDropDown> {
   @override
   Widget build(BuildContext context) {
     late Widget dropdown;
-    if (Platform.isAndroid) {
+    this._theme = Theme.of(context);
+    if (this._theme!.platform != TargetPlatform.iOS &&
+        this._theme!.platform != TargetPlatform.macOS) {
       dropdown = _androidDropDown();
-    } else if (Platform.isIOS) {
+    } else {
       dropdown = _iosDropDown(context);
     }
     return Container(
-      padding: EdgeInsets.only(top: 16, bottom: Platform.isIOS ? 16 : 0),
+      padding: EdgeInsets.only(
+          top: 16,
+          bottom: this._theme!.platform == TargetPlatform.iOS ? 16 : 0),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: Platform.isIOS ? 1 : 0,
+            width: this._theme!.platform == TargetPlatform.iOS ? 1 : 0,
             color: widget.focus!.hasFocus
                 ? Theme.of(context).accentColor
                 : Color(0xFF7C7C7C),

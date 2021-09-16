@@ -1,8 +1,11 @@
 # History of changes
 
-## [2.1.3] - 2021-09-16
+## [2.1.4] - 2021-09-16
 
 * Adding support for web
+
+## [2.1.3] - 2021-09-16
+
 * Null Safety support
 
 ## [2.1.2] - 2021-09-04

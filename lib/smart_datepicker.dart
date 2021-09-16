@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +31,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   DateTime? initial;
   DateTime? first;
   DateTime? last;
+  ThemeData? _theme;
 
   @override
   void initState() {
@@ -42,22 +41,27 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
 
   setInitialDate() {
     this.initial = DateTime.now();
+    // We can validate the default value based on the type of date input selected.
     switch (widget.type) {
       case DateTypes.eighteenYearsBefore:
+        // DateType eighteen years before restrict the user to use dates with a minimum of 18 years.
         this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
         this.first = this.initial!.subtract(Duration(days: 36600));
         this.last = this.initial;
         break;
       case DateTypes.free:
+        // DateType free let the user set any date
         this.first = this.initial!.subtract(Duration(days: 36600));
         this.last = this.initial!.add(Duration(days: 365));
         break;
       case DateTypes.todayAfter:
+        // DateType today after. This let the user set the date after today.
         this.first = this.initial;
         this.last = this.initial!.add(Duration(days: 90));
         break;
     }
     if (widget.field!.value != null) {
+      // Incase the code set a date is used as initialization.
       this.initial = DateTime.fromMillisecondsSinceEpoch(widget.field!.value);
     }
     if (this.dateTime == null) {
@@ -84,7 +88,8 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
     });
     widget.controller!.text =
         this.dateTime!.toUtc().millisecondsSinceEpoch.toString();
-    if (widget.nextFocus != null && (kIsWeb || Platform.isAndroid)) {
+    if (widget.nextFocus != null &&
+        (kIsWeb || TargetPlatform.android == this._theme!.platform)) {
       FocusScope.of(context).requestFocus(widget.nextFocus);
     }
   }
@@ -111,15 +116,16 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
   _launchPicker(BuildContext context) {
     FocusScope.of(context).requestFocus(widget.focus);
 
-    if (!Platform.isIOS && kIsWeb) {
+    if (this._theme!.platform != TargetPlatform.iOS || kIsWeb) {
       _launchAndroidPicker(context);
-    } else if (Platform.isIOS) {
+    } else if (this._theme!.platform == TargetPlatform.iOS) {
       _launchIosPicker(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    this._theme = Theme.of(context);
     return InkWell(
       onTap: () => _launchPicker(context),
       child: Container(
