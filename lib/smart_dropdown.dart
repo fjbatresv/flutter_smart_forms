@@ -1,18 +1,19 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:smart_forms/models/field.model.dart';
 
 class SmartDropDown extends StatefulWidget {
-  final FieldModel field;
-  final FocusNode focus;
-  final FocusNode nextFocus;
-  final TextEditingController controller;
+  final FieldModel? field;
+  final FocusNode? focus;
+  final FocusNode? nextFocus;
+  final TextEditingController? controller;
 
   const SmartDropDown({
-    Key key,
+    Key? key,
     this.field,
     this.focus,
     this.controller,
@@ -24,26 +25,26 @@ class SmartDropDown extends StatefulWidget {
 }
 
 class _SmartDropDownState extends State<SmartDropDown> {
-  String value;
+  String? value;
 
   @override
   void initState() {
-    this.value = widget.field.value == null
-        ? widget.field.options[0].value
-        : widget.field.value;
-    widget.controller.text =
-        widget.field.value == null ? this.value : widget.field.value;
+    this.value = widget.field!.value == null
+        ? widget.field!.options[0].value
+        : widget.field!.value;
+    widget.controller!.text =
+        widget.field!.value == null ? this.value! : widget.field!.value;
     super.initState();
   }
 
   _onChange(dynamic newValue) {
-    if (!Platform.isIOS) {
+    if (!Platform.isIOS && kIsWeb) {
       this.value = newValue;
-      widget.focus.unfocus();
+      widget.focus!.unfocus();
     } else if (Platform.isIOS) {
-      this.value = widget.field.options[newValue].value;
+      this.value = widget.field!.options[newValue].value;
     }
-    widget.controller.text = this.value;
+    widget.controller!.text = this.value!;
     setState(() {});
   }
 
@@ -58,18 +59,18 @@ class _SmartDropDownState extends State<SmartDropDown> {
           child: CupertinoPicker(
             itemExtent: 32,
             onSelectedItemChanged: _onChange,
-            children: widget.field.options.map<Widget>((option) {
+            children: widget.field!.options.map<Widget>((option) {
               return Text(option.label);
             }).toList(),
           ),
         );
       },
-    )..then((value) => widget.focus.unfocus());
+    )..then((value) => widget.focus!.unfocus());
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget dropdown;
+    late Widget dropdown;
     if (Platform.isAndroid) {
       dropdown = _androidDropDown();
     } else if (Platform.isIOS) {
@@ -81,7 +82,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
         border: Border(
           bottom: BorderSide(
             width: Platform.isIOS ? 1 : 0,
-            color: widget.focus.hasFocus
+            color: widget.focus!.hasFocus
                 ? Theme.of(context).accentColor
                 : Color(0xFF7C7C7C),
           ),
@@ -92,12 +93,12 @@ class _SmartDropDownState extends State<SmartDropDown> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.field.label,
+            widget.field!.label,
             textAlign: TextAlign.start,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: widget.focus.hasFocus
+              color: widget.focus!.hasFocus
                   ? Theme.of(context).accentColor
                   : Color(0xFF7C7C7C),
             ),
@@ -122,10 +123,10 @@ class _SmartDropDownState extends State<SmartDropDown> {
           children: [
             Text(
               value != null
-                  ? widget.field.options
+                  ? widget.field!.options
                       .firstWhere((option) => option.value == this.value)
                       .label
-                  : widget.field.hint,
+                  : widget.field!.hint,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
@@ -147,13 +148,13 @@ class _SmartDropDownState extends State<SmartDropDown> {
     return DropdownButton(
       onTap: () => FocusScope.of(context).requestFocus(widget.focus),
       isExpanded: true,
-      hint: Text(widget.field.hint),
+      hint: Text(widget.field!.hint),
       icon: Icon(
         Icons.expand_more,
         size: 16,
         color: Theme.of(context).accentColor,
       ),
-      items: widget.field.options.map<DropdownMenuItem>((option) {
+      items: widget.field!.options.map<DropdownMenuItem>((option) {
         return DropdownMenuItem(
           child: Text(option.label),
           value: option.value,

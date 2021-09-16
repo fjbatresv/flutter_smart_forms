@@ -1,5 +1,10 @@
 # History of changes
 
+## [2.1.3] - 2021-09-16
+
+* Adding support for web
+* Null Safety support
+
 ## [2.1.2] - 2021-09-04
 
 * Adding read only background color customizable
