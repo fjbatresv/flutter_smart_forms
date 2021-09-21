@@ -21,6 +21,7 @@ class SmartField extends StatefulWidget {
   final TextEditingController controller;
   final bool readOnly;
   final Color readOnlyColor;
+  final TextCapitalization capitalization;
   final Function(String)? onChange;
 
   SmartField(
@@ -45,6 +46,7 @@ class SmartField extends StatefulWidget {
       this.readOnly = false,
       this.sameTo,
       this.readOnlyColor = const Color(0xFFE9EAEE),
+      this.capitalization = TextCapitalization.none,
       this.sameToMessage})
       : super(key: key);
 
@@ -140,13 +142,6 @@ class _SmartField extends State<SmartField> {
     super.initState();
   }
 
-  TextCapitalization capitalize() {
-    if (widget.type == TextInputType.emailAddress) {
-      return TextCapitalization.none;
-    }
-    return TextCapitalization.words;
-  }
-
   @override
   Widget build(BuildContext context) {
     this.decoration.applyDefaults(Theme.of(context).inputDecorationTheme);
@@ -156,7 +151,7 @@ class _SmartField extends State<SmartField> {
       keyboardType: widget.type,
       obscureText: widget.password,
       textInputAction: _action,
-      textCapitalization: capitalize(),
+      textCapitalization: widget.capitalization,
       onChanged: widget.onChange,
       decoration: this.decoration.copyWith(
             fillColor: widget.readOnly

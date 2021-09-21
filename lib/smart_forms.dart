@@ -138,7 +138,7 @@ class SmartFormsState extends State<SmartForms> {
     } else if (widget.callback != null) {
       callback = widget.callback;
     }
-    if (field.value != null) {
+    if (field.value != null && _controllers[index].text == '') {
       _controllers[index].text = field.value;
     }
     return SmartField(
@@ -160,6 +160,7 @@ class SmartFormsState extends State<SmartForms> {
       minLengthMessage: field.minLengthMessage,
       errorMessage: field.errorMessage,
       validate: field.vallidate,
+      capitalization: field.capitalization,
       callback: callback as void Function()?,
       action: getInputAction(field.action),
     );
