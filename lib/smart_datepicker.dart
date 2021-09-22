@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +6,17 @@ import 'package:smart_forms/models/field.model.dart';
 import 'package:smart_forms/utils/enums.dart';
 
 class SmartDatepicker extends StatefulWidget {
+<<<<<<< HEAD
+  final FieldModel? field;
+  final FocusNode? focus;
+  final FocusNode? nextFocus;
+  final DateFormat? format;
+  final TextEditingController? controller;
+  final DateTypes? type;
+
+  const SmartDatepicker(
+      {Key? key,
+=======
   final FieldModel field;
   final FocusNode focus;
   final FocusNode nextFocus;
@@ -16,6 +26,7 @@ class SmartDatepicker extends StatefulWidget {
 
   const SmartDatepicker(
       {Key key,
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
       this.field,
       this.focus,
       this.controller,
@@ -28,10 +39,18 @@ class SmartDatepicker extends StatefulWidget {
 }
 
 class _SmartDatepickerState extends State<SmartDatepicker> {
+<<<<<<< HEAD
+  DateTime? dateTime;
+  DateTime? initial;
+  DateTime? first;
+  DateTime? last;
+  ThemeData? _theme;
+=======
   DateTime dateTime;
   DateTime initial;
   DateTime first;
   DateTime last;
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
 
   @override
   void initState() {
@@ -41,6 +60,35 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
 
   setInitialDate() {
     this.initial = DateTime.now();
+<<<<<<< HEAD
+    // We can validate the default value based on the type of date input selected.
+    switch (widget.type) {
+      case DateTypes.eighteenYearsBefore:
+        // DateType eighteen years before restrict the user to use dates with a minimum of 18 years.
+        this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
+        this.first = this.initial!.subtract(Duration(days: 36600));
+        this.last = this.initial;
+        break;
+      case DateTypes.free:
+        // DateType free let the user set any date
+        this.first = this.initial!.subtract(Duration(days: 36600));
+        this.last = this.initial!.add(Duration(days: 365));
+        break;
+      case DateTypes.todayAfter:
+        // DateType today after. This let the user set the date after today.
+        this.first = this.initial;
+        this.last = this.initial!.add(Duration(days: 90));
+        break;
+    }
+    if (widget.field!.value != null) {
+      // Incase the code set a date is used as initialization.
+      this.initial = DateTime.fromMillisecondsSinceEpoch(widget.field!.value);
+    }
+    if (this.dateTime == null) {
+      this.dateTime = this.initial;
+      widget.controller!.text =
+          this.dateTime!.toUtc().millisecondsSinceEpoch.toString();
+=======
     switch (widget.type) {
       case DateTypes.eighteenYearsBefore:
         this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
@@ -63,10 +111,20 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
       this.dateTime = this.initial;
       widget.controller.text =
           this.dateTime.toUtc().millisecondsSinceEpoch.toString();
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
     }
   }
 
   _launchAndroidPicker(BuildContext context) async {
+<<<<<<< HEAD
+    DateTime? date = await showDatePicker(
+      context: context,
+      initialDate: this.initial!,
+      firstDate: this.first!,
+      lastDate: this.last!,
+    );
+    widget.focus!.unfocus();
+=======
     DateTime date = await showDatePicker(
       context: context,
       initialDate: this.initial,
@@ -74,16 +132,18 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
       lastDate: this.last,
     );
     widget.focus.unfocus();
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
     _datePicked(date);
   }
 
-  _datePicked(DateTime date) {
+  _datePicked(DateTime? date) {
     this.setState(() {
       this.dateTime = date;
     });
-    widget.controller.text =
-        this.dateTime.toUtc().millisecondsSinceEpoch.toString();
-    if (widget.nextFocus != null && Platform.isAndroid) {
+    widget.controller!.text =
+        this.dateTime!.toUtc().millisecondsSinceEpoch.toString();
+    if (widget.nextFocus != null &&
+        (kIsWeb || TargetPlatform.android == this._theme!.platform)) {
       FocusScope.of(context).requestFocus(widget.nextFocus);
     }
   }
@@ -104,20 +164,30 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
             ),
           );
         })
+<<<<<<< HEAD
+      ..then((value) => widget.focus!.unfocus());
+=======
       ..then((value) => widget.focus.unfocus());
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
   }
 
   _launchPicker(BuildContext context) {
     FocusScope.of(context).requestFocus(widget.focus);
+<<<<<<< HEAD
+
+    if (this._theme!.platform != TargetPlatform.iOS || kIsWeb) {
+=======
     if (Platform.isAndroid) {
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
       _launchAndroidPicker(context);
-    } else if (Platform.isIOS) {
+    } else if (this._theme!.platform == TargetPlatform.iOS) {
       _launchIosPicker(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    this._theme = Theme.of(context);
     return InkWell(
       onTap: () => _launchPicker(context),
       child: Container(
@@ -127,7 +197,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
           border: Border(
             bottom: BorderSide(
               width: 1,
-              color: widget.focus.hasFocus
+              color: widget.focus!.hasFocus
                   ? Theme.of(context).accentColor
                   : Color(0xFF7C7C7C),
             ),
@@ -138,12 +208,12 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.field.label,
+              widget.field!.label,
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: widget.focus.hasFocus
+                color: widget.focus!.hasFocus
                     ? Theme.of(context).accentColor
                     : Color(0xFF7C7C7C),
               ),
@@ -153,8 +223,8 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
             ),
             Text(
               this.dateTime == null
-                  ? widget.field.hint
-                  : widget.format.format(this.dateTime),
+                  ? widget.field!.hint
+                  : widget.format!.format(this.dateTime!),
             )
           ],
         ),
