@@ -6,6 +6,7 @@ import 'package:smart_forms/models/field.model.dart';
 import 'package:smart_forms/utils/enums.dart';
 
 class SmartDatepicker extends StatefulWidget {
+<<<<<<< HEAD
   final FieldModel? field;
   final FocusNode? focus;
   final FocusNode? nextFocus;
@@ -15,6 +16,17 @@ class SmartDatepicker extends StatefulWidget {
 
   const SmartDatepicker(
       {Key? key,
+=======
+  final FieldModel field;
+  final FocusNode focus;
+  final FocusNode nextFocus;
+  final DateFormat format;
+  final TextEditingController controller;
+  final DateTypes type;
+
+  const SmartDatepicker(
+      {Key key,
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
       this.field,
       this.focus,
       this.controller,
@@ -27,11 +39,18 @@ class SmartDatepicker extends StatefulWidget {
 }
 
 class _SmartDatepickerState extends State<SmartDatepicker> {
+<<<<<<< HEAD
   DateTime? dateTime;
   DateTime? initial;
   DateTime? first;
   DateTime? last;
   ThemeData? _theme;
+=======
+  DateTime dateTime;
+  DateTime initial;
+  DateTime first;
+  DateTime last;
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
 
   @override
   void initState() {
@@ -41,6 +60,7 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
 
   setInitialDate() {
     this.initial = DateTime.now();
+<<<<<<< HEAD
     // We can validate the default value based on the type of date input selected.
     switch (widget.type) {
       case DateTypes.eighteenYearsBefore:
@@ -68,10 +88,35 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
       this.dateTime = this.initial;
       widget.controller!.text =
           this.dateTime!.toUtc().millisecondsSinceEpoch.toString();
+=======
+    switch (widget.type) {
+      case DateTypes.eighteenYearsBefore:
+        this.initial = DateTime.now().subtract(Duration(days: (366 * 18)));
+        this.first = this.initial.subtract(Duration(days: 36600));
+        this.last = this.initial;
+        break;
+      case DateTypes.free:
+        this.first = this.initial.subtract(Duration(days: 36600));
+        this.last = this.initial.add(Duration(days: 365));
+        break;
+      case DateTypes.todayAfter:
+        this.first = this.initial;
+        this.last = this.initial.add(Duration(days: 90));
+        break;
+    }
+    if (widget.field.value != null) {
+      this.initial = DateTime.fromMillisecondsSinceEpoch(widget.field.value);
+    }
+    if (this.dateTime == null) {
+      this.dateTime = this.initial;
+      widget.controller.text =
+          this.dateTime.toUtc().millisecondsSinceEpoch.toString();
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
     }
   }
 
   _launchAndroidPicker(BuildContext context) async {
+<<<<<<< HEAD
     DateTime? date = await showDatePicker(
       context: context,
       initialDate: this.initial!,
@@ -79,6 +124,15 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
       lastDate: this.last!,
     );
     widget.focus!.unfocus();
+=======
+    DateTime date = await showDatePicker(
+      context: context,
+      initialDate: this.initial,
+      firstDate: this.first,
+      lastDate: this.last,
+    );
+    widget.focus.unfocus();
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
     _datePicked(date);
   }
 
@@ -110,13 +164,21 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
             ),
           );
         })
+<<<<<<< HEAD
       ..then((value) => widget.focus!.unfocus());
+=======
+      ..then((value) => widget.focus.unfocus());
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
   }
 
   _launchPicker(BuildContext context) {
     FocusScope.of(context).requestFocus(widget.focus);
+<<<<<<< HEAD
 
     if (this._theme!.platform != TargetPlatform.iOS || kIsWeb) {
+=======
+    if (Platform.isAndroid) {
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
       _launchAndroidPicker(context);
     } else if (this._theme!.platform == TargetPlatform.iOS) {
       _launchIosPicker(context);

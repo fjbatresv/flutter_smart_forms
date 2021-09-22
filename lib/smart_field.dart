@@ -20,9 +20,13 @@ class SmartField extends StatefulWidget {
   final String? minLengthMessage;
   final TextEditingController controller;
   final bool readOnly;
+<<<<<<< HEAD
   final Color readOnlyColor;
   final TextCapitalization capitalization;
   final Function(String)? onChange;
+=======
+  final Function(String) onChange;
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
 
   SmartField(
       {Key? key,
@@ -151,6 +155,7 @@ class _SmartField extends State<SmartField> {
       keyboardType: widget.type,
       obscureText: widget.password,
       textInputAction: _action,
+<<<<<<< HEAD
       textCapitalization: widget.capitalization,
       onChanged: widget.onChange,
       decoration: this.decoration.copyWith(
@@ -161,6 +166,15 @@ class _SmartField extends State<SmartField> {
             errorText: _error ? this.errorMessage : null,
             hintText: widget.hint,
           ),
+=======
+      textCapitalization: capitalize(),
+      onChanged: widget.onChange,
+      decoration: InputDecoration(
+        labelText: _label,
+        errorText: _error ? this.errorMessage : null,
+        hintText: widget.hint,
+      ),
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
       onEditingComplete: _editCompleted,
       onFieldSubmitted: _fieldSubmit,
       keyboardAppearance: Brightness.light,

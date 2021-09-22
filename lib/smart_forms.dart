@@ -138,7 +138,11 @@ class SmartFormsState extends State<SmartForms> {
     } else if (widget.callback != null) {
       callback = widget.callback;
     }
+<<<<<<< HEAD
     if (field.value != null && _controllers[index].text == '') {
+=======
+    if (field.value != null) {
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
       _controllers[index].text = field.value;
     }
     return SmartField(
