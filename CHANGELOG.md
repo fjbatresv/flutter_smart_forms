@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.1.5] - 2021-09-16
+
+* Fixing a little issue with the default value
+
 ## [2.1.4] - 2021-09-16
 
 * Adding support for web
