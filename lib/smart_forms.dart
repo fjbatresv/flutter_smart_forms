@@ -1,5 +1,3 @@
-library smart_forms;
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_forms/smart_datepicker.dart';
@@ -11,11 +9,11 @@ import './utils/enums.dart';
 import 'smart_field.dart';
 
 class SmartForms extends StatefulWidget {
-  final FormModel form;
+  final FormModel? form;
   final dynamic callback;
   const SmartForms({
-    Key key,
-    @required this.form,
+    Key? key,
+    required this.form,
     this.callback,
   }) : super(key: key);
 
@@ -32,24 +30,24 @@ class SmartFormsState extends State<SmartForms> {
 
   List<Widget> _buildForms(BuildContext context) {
     List<Widget> widgets = [];
-    int length = widget.form.fields.length;
+    int length = widget.form!.fields.length;
     for (int i = 0; i < length; i++) {
-      FieldModel field = widget.form.fields[i];
+      FieldModel field = widget.form!.fields[i];
       widgets.add(_buildField(field, i, length));
     }
     List<Widget> buttons = [];
-    if (widget.form.resetButton.isNotEmpty) {
+    if (widget.form!.resetButton.isNotEmpty) {
       buttons.add(
-        FlatButton(
-          child: Text(widget.form.resetButton),
+        TextButton(
+          child: Text(widget.form!.resetButton),
           onPressed: () => resetForm,
         ),
       );
     }
-    if (widget.form.submitButton.isNotEmpty) {
+    if (widget.form!.submitButton.isNotEmpty) {
       buttons.add(
-        RaisedButton(
-          child: Text(widget.form.submitButton),
+        ElevatedButton(
+          child: Text(widget.form!.submitButton),
           onPressed: _validateForm,
         ),
       );
@@ -79,15 +77,17 @@ class SmartFormsState extends State<SmartForms> {
   }
 
   Widget _buildField(FieldModel field, index, length) {
-    double bottomPadding = 8;
-    if (index == length - 1 && widget.form.submitButton.isNotEmpty) {
-      bottomPadding = 16;
-    } else if (index == length - 1 && widget.form.submitButton.isEmpty) {
-      bottomPadding = 0;
+    double? bottomPadding = field.padding != null ? field.padding : 8;
+    if (field.padding != null) {
+      if (index == length - 1 && widget.form!.submitButton.isNotEmpty) {
+        bottomPadding = 16;
+      } else if (index == length - 1 && widget.form!.submitButton.isEmpty) {
+        bottomPadding = 0;
+      }
     }
     return Padding(
       padding: EdgeInsets.only(
-        bottom: bottomPadding,
+        bottom: bottomPadding!,
         top: 0,
       ),
       child: Builder(
@@ -126,19 +126,23 @@ class SmartFormsState extends State<SmartForms> {
   }
 
   Widget _buildSmartField(FieldModel field, int index, int length) {
-    TextEditingController sameToController;
+    TextEditingController? sameToController;
     if (field.sameTo.isNotEmpty) {
-      final int sameTo = widget.form.fields
+      final int sameTo = widget.form!.fields
           .indexWhere((FieldModel i) => i.name == field.sameTo);
       sameToController = sameTo != -1 ? _controllers[sameTo] : null;
     }
-    Function callback;
-    if (widget.form.submitButton.isNotEmpty) {
+    Function? callback;
+    if (widget.form!.submitButton.isNotEmpty) {
       callback = _validateForm;
     } else if (widget.callback != null) {
       callback = widget.callback;
     }
+<<<<<<< HEAD
+    if (field.value != null && _controllers[index].text == '') {
+=======
     if (field.value != null) {
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
       _controllers[index].text = field.value;
     }
     return SmartField(
@@ -150,6 +154,7 @@ class SmartFormsState extends State<SmartForms> {
       password: field.password,
       mandatory: field.mandatory,
       readOnly: field.readOnly,
+      readOnlyColor: field.readOnlyColor,
       sameTo: sameToController,
       sameToMessage: field.sameToError,
       hint: field.hint.isEmpty ? null : field.hint,
@@ -159,7 +164,8 @@ class SmartFormsState extends State<SmartForms> {
       minLengthMessage: field.minLengthMessage,
       errorMessage: field.errorMessage,
       validate: field.vallidate,
-      callback: callback,
+      capitalization: field.capitalization,
+      callback: callback as void Function()?,
       action: getInputAction(field.action),
     );
   }
@@ -171,7 +177,7 @@ class SmartFormsState extends State<SmartForms> {
   }
 
   bool validateForm() {
-    return _form.currentState.validate();
+    return _form.currentState!.validate();
   }
 
   resetForm() {
@@ -180,19 +186,19 @@ class SmartFormsState extends State<SmartForms> {
 
   Map<String, dynamic> responseToMap() {
     Map<String, dynamic> values = {};
-    for (int i = 0; i < widget.form.fields.length; i++) {
-      String key = widget.form.fields[i].name;
+    for (int i = 0; i < widget.form!.fields.length; i++) {
+      String key = widget.form!.fields[i].name;
       values[key] = _controllers[i].text;
     }
-    return {'form': widget.form.name, 'values': values};
+    return {'form': widget.form!.name, 'values': values};
   }
 
   @override
   void initState() {
-    _controllers = widget.form.fields.map<TextEditingController>((field) {
+    _controllers = widget.form!.fields.map<TextEditingController>((field) {
       return TextEditingController();
     }).toList();
-    _focuses = widget.form.fields.map<FocusNode>((field) {
+    _focuses = widget.form!.fields.map<FocusNode>((field) {
       return FocusNode();
     }).toList();
     super.initState();

@@ -24,9 +24,16 @@ class FieldModel {
   final DateTypes dateType;
   final List<FieldOptionsModel> options;
   final dynamic value;
+<<<<<<< HEAD
+  final double? padding;
+  final TextCapitalization capitalization;
+  final Color readOnlyColor;
+=======
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
 
   FieldModel({
-    @required this.label,
+    required this.label,
+    this.padding,
     this.name = '',
     this.sameTo = '',
     this.sameToError = '',
@@ -44,7 +51,13 @@ class FieldModel {
     this.readOnly = false,
     this.options = const [],
     this.dateTimeFormat = 'MM/dd/yyyy',
+<<<<<<< HEAD
+    this.capitalization = TextCapitalization.none,
     this.dateType = DateTypes.eighteenYearsBefore,
+    this.readOnlyColor = const Color(0xFFE9EAEE),
+=======
+    this.dateType = DateTypes.eighteenYearsBefore,
+>>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
     this.value,
   }) {
     if (this.name.isEmpty) {

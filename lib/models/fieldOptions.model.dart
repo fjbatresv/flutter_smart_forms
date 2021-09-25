@@ -4,5 +4,5 @@ class FieldOptionsModel {
   final String label;
   final String value;
 
-  FieldOptionsModel({@required this.label, @required this.value});
+  FieldOptionsModel({required this.label, required this.value});
 }
