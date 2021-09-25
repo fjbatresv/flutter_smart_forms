@@ -29,34 +29,20 @@ class _SmartDropDownState extends State<SmartDropDown> {
 
   @override
   void initState() {
-<<<<<<< HEAD
     this.value = widget.field!.value == null
         ? widget.field!.options[0].value
         : widget.field!.value;
     widget.controller!.text =
         widget.field!.value == null ? this.value! : widget.field!.value;
-=======
-    this.value = widget.field.value == null
-        ? widget.field.options[0].value
-        : widget.field.value;
-    widget.controller.text =
-        widget.field.value == null ? this.value : widget.field.value;
->>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
     super.initState();
   }
 
   _onChange(dynamic newValue) {
     if (this._theme!.platform != TargetPlatform.iOS || kIsWeb) {
       this.value = newValue;
-<<<<<<< HEAD
       widget.focus!.unfocus();
     } else if (this._theme!.platform == TargetPlatform.iOS) {
       this.value = widget.field!.options[newValue].value;
-=======
-      widget.focus.unfocus();
-    } else if (Platform.isIOS) {
-      this.value = widget.field.options[newValue].value;
->>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
     }
     widget.controller!.text = this.value!;
     setState(() {});
@@ -79,11 +65,7 @@ class _SmartDropDownState extends State<SmartDropDown> {
           ),
         );
       },
-<<<<<<< HEAD
     )..then((value) => widget.focus!.unfocus());
-=======
-    )..then((value) => widget.focus.unfocus());
->>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
   }
 
   @override
