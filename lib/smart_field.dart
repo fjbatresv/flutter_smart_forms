@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SmartField extends StatefulWidget {
   final TextInputType type;
@@ -23,32 +24,34 @@ class SmartField extends StatefulWidget {
   final Color readOnlyColor;
   final TextCapitalization capitalization;
   final Function(String)? onChange;
+  final List<TextInputFormatter>? formatters;
 
-  SmartField(
-      {Key? key,
-      this.type = TextInputType.text,
-      required this.focusNode,
-      required this.nextFocus,
-      this.action,
-      required this.label,
-      this.hint,
-      this.errorMessage,
-      this.mandatory = false,
-      this.validate = false,
-      this.maxLength,
-      this.maxLengthMessage,
-      this.minLength,
-      this.minLengthMessage,
-      this.callback,
-      this.onChange,
-      this.password = false,
-      required this.controller,
-      this.readOnly = false,
-      this.sameTo,
-      this.readOnlyColor = const Color(0xFFE9EAEE),
-      this.capitalization = TextCapitalization.none,
-      this.sameToMessage})
-      : super(key: key);
+  SmartField({
+    Key? key,
+    this.type = TextInputType.text,
+    required this.focusNode,
+    required this.nextFocus,
+    this.action,
+    required this.label,
+    this.hint,
+    this.errorMessage,
+    this.mandatory = false,
+    this.validate = false,
+    this.maxLength,
+    this.maxLengthMessage,
+    this.minLength,
+    this.minLengthMessage,
+    this.callback,
+    this.onChange,
+    this.password = false,
+    required this.controller,
+    this.readOnly = false,
+    this.sameTo,
+    this.readOnlyColor = const Color(0xFFE9EAEE),
+    this.capitalization = TextCapitalization.none,
+    this.sameToMessage,
+    this.formatters,
+  }) : super(key: key);
 
   @override
   _SmartField createState() {
@@ -151,6 +154,7 @@ class _SmartField extends State<SmartField> {
       keyboardType: widget.type,
       obscureText: widget.password,
       textInputAction: _action,
+      inputFormatters: widget.formatters,
       textCapitalization: widget.capitalization,
       onChanged: widget.onChange,
       decoration: this.decoration.copyWith(

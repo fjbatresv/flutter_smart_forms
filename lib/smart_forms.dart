@@ -163,6 +163,7 @@ class SmartFormsState extends State<SmartForms> {
       capitalization: field.capitalization,
       callback: callback as void Function()?,
       action: getInputAction(field.action),
+      formatters: field.formatters,
     );
   }
 

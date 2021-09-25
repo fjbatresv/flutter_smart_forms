@@ -49,15 +49,16 @@ class _SmartDatepickerState extends State<SmartDatepicker> {
         this.first = this.initial!.subtract(Duration(days: 36600));
         this.last = this.initial;
         break;
-      case DateTypes.free:
-        // DateType free let the user set any date
-        this.first = this.initial!.subtract(Duration(days: 36600));
-        this.last = this.initial!.add(Duration(days: 365));
-        break;
       case DateTypes.todayAfter:
         // DateType today after. This let the user set the date after today.
         this.first = this.initial;
         this.last = this.initial!.add(Duration(days: 90));
+        break;
+      case DateTypes.free:
+      default:
+        // DateType free let the user set any date
+        this.first = this.initial!.subtract(Duration(days: 36600));
+        this.last = this.initial!.add(Duration(days: 365));
         break;
     }
     if (widget.field!.value != null) {
