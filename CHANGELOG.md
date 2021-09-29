@@ -1,5 +1,21 @@
 # History of changes
 
+## [2.2.0] - 2021-09-29
+
+* Adding new support for TextInputFormattgiter. I recommend to use [mask_text_input_formatter](https://pub.dev/packages/mask_text_input_formatter)
+
+## [2.1.5] - 2021-09-16
+
+* Fixing a little issue with the default value
+
+## [2.1.4] - 2021-09-16
+
+* Adding support for web
+
+## [2.1.3] - 2021-09-16
+
+* Null Safety support
+
 ## [2.1.2] - 2021-09-04
 
 * Adding read only background color customizable
@@ -31,7 +47,7 @@
 * Now you can set default value for fields
 * Added different types of input for common usages
 
-## [1.2.0] - 2020-11-11
+## [1.0.0] - 2020-05-23
 
 * Added support for datepicker
 * Rendering the datepicker based in OS (Android/iOS).

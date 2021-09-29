@@ -47,7 +47,7 @@ enum InputActions {
   done,
 }
 
-TextInputAction getInputAction(InputActions action) {
+TextInputAction? getInputAction(InputActions action) {
   switch (action) {
     case InputActions.done:
       return TextInputAction.done;
