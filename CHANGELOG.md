@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.2.0] - 2021-09-29
+
+* Adding new support for TextInputFormatter. I recommend to use [mask_text_input_formatter](https://pub.dev/packages/mask_text_input_formatter)
+
 ## [2.1.5] - 2021-09-16
 
 * Fixing a little issue with the default value
