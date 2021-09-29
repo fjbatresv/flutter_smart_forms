@@ -18,7 +18,6 @@
 
 ## [2.1.2] - 2021-09-04
 
-<<<<<<< HEAD
 * Adding read only background color customizable
 
 ## [2.1.1] - 2021-09-04
@@ -47,23 +46,9 @@
 * Now you can set default date in millisecondSinceEpoch
 * Now you can set default value for fields
 * Added different types of input for common usages
-=======
-* Added support to compare two fields and set child like invalid.
-* Fixed an issue for buttons
-
-## [1.0.2] - 2020-11-05
-
-* Added new option to manage the validation, reset and get the response with external buttons.
-* Added example with new functionallity.
-
-## [1.0.1] - 2020-05-26
-
-* Added the example of usage with 2 fields.
->>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
 
 ## [1.0.0] - 2020-05-23
 
-<<<<<<< HEAD
 * Added support for datepicker
 * Rendering the datepicker based in OS (Android/iOS).
 
@@ -92,6 +77,4 @@
 
 ## [1.0.0] - 2020-05-23
 
-=======
->>>>>>> c9651bdca6f8a0787b06ffcc03303fd56409257b
 * The firs release include 6 field types (with many parameters), 2 input actions, submit button, reset Button.
