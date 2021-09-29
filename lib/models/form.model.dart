@@ -9,9 +9,9 @@ class FormModel {
   final List<FieldModel> fields;
 
   FormModel({
-    @required this.name,
+    required this.name,
     this.submitButton = '',
     this.resetButton = '',
-    @required this.fields,
+    required this.fields,
   });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smart_forms/models/fieldOptions.model.dart';
 
 import '../utils/enums.dart';
@@ -24,11 +25,13 @@ class FieldModel {
   final DateTypes dateType;
   final List<FieldOptionsModel> options;
   final dynamic value;
-  final double padding;
+  final double? padding;
+  final TextCapitalization capitalization;
   final Color readOnlyColor;
+  final List<TextInputFormatter>? formatters;
 
   FieldModel({
-    @required this.label,
+    required this.label,
     this.padding,
     this.name = '',
     this.sameTo = '',
@@ -47,9 +50,11 @@ class FieldModel {
     this.readOnly = false,
     this.options = const [],
     this.dateTimeFormat = 'MM/dd/yyyy',
+    this.capitalization = TextCapitalization.none,
     this.dateType = DateTypes.eighteenYearsBefore,
     this.readOnlyColor = const Color(0xFFE9EAEE),
     this.value,
+    this.formatters,
   }) {
     if (this.name.isEmpty) {
       this.name = this.label;
