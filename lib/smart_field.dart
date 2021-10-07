@@ -54,17 +54,25 @@ class SmartField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SmartField createState() {
-    return _SmartField();
+  SmartFieldState createState() {
+    return SmartFieldState();
   }
 }
 
-class _SmartField extends State<SmartField> {
+class SmartFieldState extends State<SmartField> {
   bool _error = false;
   TextInputAction? _action;
   String? _label;
   String? errorMessage = '';
+  bool dirty = false;
+  String defaultStr = '';
   InputDecoration decoration = InputDecoration();
+
+  validateDirty() {
+    if (!dirty) {
+      dirty = widget.controller.text != this.defaultStr;
+    }
+  }
 
   bool validField(TextInputType type, String? value) {
     errorMessage = widget.errorMessage;
@@ -114,6 +122,7 @@ class _SmartField extends State<SmartField> {
   }
 
   void _editCompleted() {
+    this.validateDirty();
     String text = widget.controller.text;
     setState(() {
       _error = ((widget.mandatory && (text == null || text.isEmpty)) ||
@@ -122,6 +131,7 @@ class _SmartField extends State<SmartField> {
   }
 
   void _fieldSubmit(String value) {
+    this.validateDirty();
     if (widget.nextFocus != null) {
       FocusScope.of(context).requestFocus(widget.nextFocus);
     } else if (widget.callback != null) {
@@ -132,6 +142,7 @@ class _SmartField extends State<SmartField> {
   @override
   void initState() {
     _action = widget.action;
+    this.defaultStr = widget.controller.text;
     if (_action == null) {
       _action = (widget.nextFocus == null)
           ? TextInputAction.done

@@ -27,6 +27,7 @@ class SmartFormsState extends State<SmartForms> {
   GlobalKey<FormState> _form = GlobalKey<FormState>();
   List<TextEditingController> _controllers = [];
   List<FocusNode> _focuses = [];
+  List<GlobalKey<SmartFieldState>> _fieldKeys = [];
 
   List<Widget> _buildForms(BuildContext context) {
     List<Widget> widgets = [];
@@ -142,6 +143,7 @@ class SmartFormsState extends State<SmartForms> {
       _controllers[index].text = field.value;
     }
     return SmartField(
+      key: _fieldKeys[index],
       type: getInputType(field.type),
       focusNode: _focuses[index],
       controller: _controllers[index],
@@ -177,6 +179,19 @@ class SmartFormsState extends State<SmartForms> {
     return _form.currentState!.validate();
   }
 
+  bool isDirty() {
+    bool dirty = false;
+    for (int i = 0; i < _fieldKeys.length; i++) {
+      if (_fieldKeys[i].currentState != null) {
+        dirty = _fieldKeys[i].currentState!.dirty;
+        if (dirty) {
+          break;
+        }
+      }
+    }
+    return dirty;
+  }
+
   resetForm() {
     _controllers.forEach((controller) => controller.clear());
   }
@@ -197,6 +212,9 @@ class SmartFormsState extends State<SmartForms> {
     }).toList();
     _focuses = widget.form!.fields.map<FocusNode>((field) {
       return FocusNode();
+    }).toList();
+    _fieldKeys = widget.form!.fields.map<GlobalKey<SmartFieldState>>((field) {
+      return GlobalKey<SmartFieldState>();
     }).toList();
     super.initState();
   }
