@@ -68,6 +68,13 @@ class SmartFieldState extends State<SmartField> {
   String defaultStr = '';
   InputDecoration decoration = InputDecoration();
 
+  onChange(String value) {
+    this.validateDirty();
+    if (widget.onChange != null) {
+      widget.onChange!(value);
+    }
+  }
+
   validateDirty() {
     if (!dirty) {
       dirty = widget.controller.text != this.defaultStr;
@@ -167,7 +174,7 @@ class SmartFieldState extends State<SmartField> {
       textInputAction: _action,
       inputFormatters: widget.formatters,
       textCapitalization: widget.capitalization,
-      onChanged: widget.onChange,
+      onChanged: onChange,
       decoration: this.decoration.copyWith(
             fillColor: widget.readOnly
                 ? widget.readOnlyColor
