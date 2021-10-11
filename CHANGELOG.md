@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.2.1] - 2021-10-11
+
+* Now you can validate if the form data has been modified using **isDirty(): boolean** in the **SmartFormState**
+
 ## [2.2.0] - 2021-09-29
 
 * Adding new support for TextInputFormattgiter. I recommend to use [mask_text_input_formatter](https://pub.dev/packages/mask_text_input_formatter)

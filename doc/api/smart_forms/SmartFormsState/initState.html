@@ -53,7 +53,7 @@
       
 <div>
   <ol class="annotation-list">
-    <li>@<a href="https://api.dart.dev/stable/2.14.2/dart-core/override-constant.html">override</a></li>
+    <li>@<a href="https://api.dart.dev/stable/2.14.3/dart-core/override-constant.html">override</a></li>
   </ol>
 </div>
 
@@ -72,7 +72,7 @@ it creates.</p>
 location at which this object was inserted into the tree (i.e., <a href="../../smart_forms/SmartFormsState/context.html">context</a>)
 or on the widget used to configure this object (i.e., <a href="../../smart_forms/SmartFormsState/widget.html">widget</a>).</p>
 <p>If a <code>State</code>'s <a href="../../smart_forms/SmartFormsState/build.html">build</a> method depends on an object that can itself
-change state, for example a <code>ChangeNotifier</code> or <a href="https://api.dart.dev/stable/2.14.2/dart-async/Stream-class.html">Stream</a>, or some
+change state, for example a <code>ChangeNotifier</code> or <a href="https://api.dart.dev/stable/2.14.3/dart-async/Stream-class.html">Stream</a>, or some
 other object to which one can subscribe to receive notifications, then
 be sure to subscribe and unsubscribe properly in <a href="../../smart_forms/SmartFormsState/initState.html">initState</a>,
 <a href="../../smart_forms/SmartFormsState/didUpdateWidget.html">didUpdateWidget</a>, and <a href="../../smart_forms/SmartFormsState/dispose.html">dispose</a>:</p>
@@ -102,6 +102,9 @@ void initState() {
   }).toList();
   _focuses = widget.form!.fields.map&lt;FocusNode&gt;((field) {
     return FocusNode();
+  }).toList();
+  _fieldKeys = widget.form!.fields.map&lt;GlobalKey&lt;SmartFieldState&gt;&gt;((field) {
+    return GlobalKey&lt;SmartFieldState&gt;();
   }).toList();
   super.initState();
 }</code></pre>
@@ -136,9 +139,9 @@ void initState() {
       <a href="../../smart_forms/SmartFormsState-class.html#instance-properties">Properties</a>
     </li>
     <li class="inherited"><a href="../../smart_forms/SmartFormsState/context.html">context</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.2/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.3/dart-core/Object/hashCode.html">hashCode</a></li>
     <li class="inherited"><a href="../../smart_forms/SmartFormsState/mounted.html">mounted</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.2/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.3/dart-core/Object/runtimeType.html">runtimeType</a></li>
     <li class="inherited"><a href="../../smart_forms/SmartFormsState/widget.html">widget</a></li>
 
     <li class="section-title"><a href="../../smart_forms/SmartFormsState-class.html#instance-methods">Methods</a></li>
@@ -150,7 +153,8 @@ void initState() {
     <li class="inherited"><a href="../../smart_forms/SmartFormsState/didUpdateWidget.html">didUpdateWidget</a></li>
     <li class="inherited"><a href="../../smart_forms/SmartFormsState/dispose.html">dispose</a></li>
     <li><a href="../../smart_forms/SmartFormsState/initState.html">initState</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../../smart_forms/SmartFormsState/isDirty.html">isDirty</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.3/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
     <li class="inherited"><a href="../../smart_forms/SmartFormsState/reassemble.html">reassemble</a></li>
     <li><a href="../../smart_forms/SmartFormsState/resetForm.html">resetForm</a></li>
     <li><a href="../../smart_forms/SmartFormsState/responseToMap.html">responseToMap</a></li>
@@ -161,7 +165,7 @@ void initState() {
     <li><a href="../../smart_forms/SmartFormsState/validateForm.html">validateForm</a></li>
 
     <li class="section-title inherited"><a href="../../smart_forms/SmartFormsState-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.2/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.3/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -178,7 +182,7 @@ void initState() {
 <footer>
   <span class="no-break">
     smart_forms
-      2.2.0
+      2.2.1
   </span>
 
   
