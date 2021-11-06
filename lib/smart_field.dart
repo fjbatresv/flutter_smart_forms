@@ -25,33 +25,35 @@ class SmartField extends StatefulWidget {
   final TextCapitalization capitalization;
   final Function(String)? onChange;
   final List<TextInputFormatter>? formatters;
+  final String? initialValue;
 
-  SmartField({
-    Key? key,
-    this.type = TextInputType.text,
-    required this.focusNode,
-    required this.nextFocus,
-    this.action,
-    required this.label,
-    this.hint,
-    this.errorMessage,
-    this.mandatory = false,
-    this.validate = false,
-    this.maxLength,
-    this.maxLengthMessage,
-    this.minLength,
-    this.minLengthMessage,
-    this.callback,
-    this.onChange,
-    this.password = false,
-    required this.controller,
-    this.readOnly = false,
-    this.sameTo,
-    this.readOnlyColor = const Color(0xFFE9EAEE),
-    this.capitalization = TextCapitalization.none,
-    this.sameToMessage,
-    this.formatters,
-  }) : super(key: key);
+  SmartField(
+      {Key? key,
+      this.type = TextInputType.text,
+      required this.focusNode,
+      required this.nextFocus,
+      this.action,
+      required this.label,
+      this.hint,
+      this.errorMessage,
+      this.mandatory = false,
+      this.validate = false,
+      this.maxLength,
+      this.maxLengthMessage,
+      this.minLength,
+      this.minLengthMessage,
+      this.callback,
+      this.onChange,
+      this.password = false,
+      required this.controller,
+      this.readOnly = false,
+      this.sameTo,
+      this.readOnlyColor = const Color(0xFFE9EAEE),
+      this.capitalization = TextCapitalization.none,
+      this.sameToMessage,
+      this.formatters,
+      this.initialValue})
+      : super(key: key);
 
   @override
   SmartFieldState createState() {
@@ -168,6 +170,7 @@ class SmartFieldState extends State<SmartField> {
     this.decoration.applyDefaults(Theme.of(context).inputDecorationTheme);
     return TextFormField(
       controller: widget.controller,
+      initialValue: widget.initialValue,
       focusNode: widget.focusNode,
       keyboardType: widget.type,
       obscureText: widget.password,

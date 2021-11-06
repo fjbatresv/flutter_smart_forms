@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.2.2] - 2021-11-05
+
+* I've changed the initialValue for SmartFields.
+
 ## [2.2.1] - 2021-10-11
 
 * Now you can validate if the form data has been modified using **isDirty(): boolean** in the **SmartFormState**
