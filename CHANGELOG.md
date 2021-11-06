@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.2.3] - 2021-11-06
+
+* Changing the logical process to update default values.
+
 ## [2.2.2] - 2021-11-05
 
 * I've changed the initialValue for SmartFields.
