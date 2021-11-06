@@ -1,5 +1,9 @@
 # History of changes
 
+## [2.2.4] - 2021-11-06
+
+* Final fix for defaultValues.
+
 ## [2.2.3] - 2021-11-06
 
 * Changing the logical process to update default values.

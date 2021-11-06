@@ -142,8 +142,7 @@ class SmartFormsState extends State<SmartForms> {
     if (field.value != null &&
         field.value != '' &&
         _controllers[index].text == '' &&
-        _fieldKeys[index].currentState != null &&
-        !_fieldKeys[index].currentState!.dirty) {
+        _fieldKeys[index].currentState == null) {
       _controllers[index].text = field.value;
     }
     return SmartField(
